@@ -22,12 +22,17 @@ export default function Home() {
                   Contact
                 </a>
               </li>
+             
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                 <a href="/About" className="flex items-center text-blue-gray-900">
                   About
                 </a>
               </li>
-           
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/AddProduct" className="flex items-center">
+                  Add Product
+                </a>
+              </li>
             </ul>
           </div>
           <div className="flex items-center gap-x-1 text-black">

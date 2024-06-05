@@ -22,7 +22,7 @@ db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
 // sequelize
-//   .authenticate()
+//   .sync({force:true})
 //   .then(() => {
 //     console.log("all good");
 //   })
@@ -30,5 +30,5 @@ db.Product.belongsToMany(db.User, { through: db.Panier });
 //     console.error("Unable to connect to the database:", err);
 //   });
 
-// ;
+;
 module.exports = db;
