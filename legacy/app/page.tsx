@@ -1,9 +1,9 @@
 "use client"
 import Image from 'next/image';
 import React from 'react'
-// import "../app/NavBar/NavBar.css";
+
 export default function Home() {
-  return (
+  return ( 
     <nav>
  <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
   <div className="-m-6 max-h-[768px] w-[calc(100%+48px)] ">
@@ -11,7 +11,7 @@ export default function Home() {
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
         <a href="/HomePage"
-          className="mr-4 block cursor-pointer py-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased">
+          className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
         <div className="flex items-center gap-4">

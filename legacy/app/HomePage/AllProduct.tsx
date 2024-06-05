@@ -1,5 +1,5 @@
 "use client"
-import Image from 'next/image'
+// import Image from 'next/image'
 import React from 'react'
 import { useRouter } from 'next/navigation'
 
@@ -9,9 +9,9 @@ const AllProduct = ({el}) => {
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg" onClick={() => router.push('/HomePage/id',el={el})}>
     <div
       className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-      <Image 
+      <img
       fill
-        src=""
+        src={el.image}
         alt="ui/ux review check" 
         
         />
@@ -47,7 +47,7 @@ const AllProduct = ({el}) => {
         </p>
       </div>
       <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
-        {el.description}
+        {el.price}
       </p>
       <div className="inline-flex flex-wrap items-center gap-3 mt-8 group">
      

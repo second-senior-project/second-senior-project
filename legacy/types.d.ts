@@ -6,5 +6,5 @@ interface SellProduct{
     product:array;
     description:string;
      src:string;
-    el:any
+    el:any;button :
 }
