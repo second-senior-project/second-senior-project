@@ -1,40 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-const editProduct = () => {
+import { usePathname, useRouter } from "next/navigation";
+
+
+const editProduct = ({handlup}) => {
   const router = useRouter();
+  const pathName = usePathname();
+  
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
+  
+  
 
-  const updateProd = (id) => {
-    console.log("test");
 
-    axios
-      .put(`http://localhost:4000/api/seller/${1}`, {
-        category: category,
-        name: name,
-        price: price,
-        description: description,
-        image: image,
-      })
-      .then((res) => {
-        alert("Product updated successfully");
-        setData(data);
-        console.log("test", res.data);
-        router.push("/HomePage");
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handlup = (e) => {
-    e.preventDefault();
-    updateProd(1);
-  };
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -66,7 +49,7 @@ const editProduct = () => {
                 Edit Product
               </h1>
               <h2 className="text-grey text-sm mb-4 dark:text-gray-400">
-                Update Your Profile
+                Update Your Product
               </h2>
               <form onSubmit={handlup}>
                 <div className="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
