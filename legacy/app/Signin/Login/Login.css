@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+#login {
+    margin-top: -80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.session {
+    display: flex;
+    flex-direction: row;
+    width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.left {
+    flex: 1;
+    width: 40%;
+    background-color: #e0f7fa;
+    background-image: url("https://www.moonstride.com/wp-content/uploads/2020/08/1-1.svg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.left img {
+    width: 100%;
+    height: auto;
+}
+
+.login {
+    width: 50%;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+}
+
+.login h4 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.login p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.floatingLabel {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.floatingLabel input {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.floatingLabel label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.floatingLabel input:focus {
+    border-color: #b69de6;
+    outline: none;
+}
+
+.floatingLabel input:focus + label,
+.floatingLabel input:not(:placeholder-shown) + label {
+    top: 0;
+    transform: translateY(-150%);
+    font-size: 12px;
+    color: #666;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4d4d;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #6666ff;
+}
+
+#login p {
+    color: rgb(200, 65, 65);
+    margin-top: 20px;
+    font-size: 14px;
+}

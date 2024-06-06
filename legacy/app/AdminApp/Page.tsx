@@ -12,7 +12,7 @@ const Admin = () => {
   const [dataprodact, setdataprodact] = useState([]);
   const [datauser, setdatauser] = useState([]);
   const [dataseller, setdataseller] = useState([]);
-  const [selectedTab, setSelectedTab] = useState('product'); // Changed to 'product'
+  const [selectedTab, setSelectedTab] = useState('product'); 
 
   useEffect(() => {
     const fetchData = async () => {
