@@ -5,12 +5,11 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import '../EditProfile/EditProfile.css';
 import toast from 'react-hot-toast';
-import { useAuth } from "../context/AuthContext";
-import { ProfileType, Passwords } from './types'; 
+import { useAuth } from "../components/context/AuthContext";
 
 const Profile: React.FC = () => {
   const router = useRouter();
-  const { user, setUser } = useAuth(); 
+  const { user, setUser } = useAuth();
   const [profile, setProfile] = useState<ProfileType>({
     username: '',
     email: '',
@@ -46,6 +45,11 @@ const Profile: React.FC = () => {
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!user) {
+      toast.error('User not logged in!');
+      return;
+    }
+
     if (
       passwords.newPassword &&
       passwords.newPassword !== passwords.confirmNewPassword
@@ -69,7 +73,7 @@ const Profile: React.FC = () => {
       .then((response) => {
         const updatedUser = { ...user, ...response.data.user };
         localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUser(updatedUser); 
+        setUser(updatedUser);
         router.push('/');
         toast.success('Profile updated successfully!');
       })
