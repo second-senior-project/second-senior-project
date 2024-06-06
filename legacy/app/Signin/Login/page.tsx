@@ -1,13 +1,14 @@
 "use client";
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../../components/context/AuthContext';
+import "./Login.css";
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const router = useRouter();
   const { loginAction } = useAuth();
 
@@ -15,6 +16,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await loginAction({ username, email, password });
+      setMessage('Login successful!');
       router.push('/');
     } catch (error) {
       console.error(error); 
@@ -23,64 +25,49 @@ export default function Login() {
   };
 
   return (
-    <div style={{ marginTop: '200px' }}>
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-        <div style={{ marginBottom: '20px' }}>
-          <svg
-            enableBackground="new 0 0 300 302.5"
-            version="1.1"
-            viewBox="0 0 300 302.5"
-            xmlSpace="preserve"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ width: '100px', height: '100px' }}
-          >
-            <style key="custom-svg-style" type="text/css" dangerouslySetInnerHTML={{ __html: "\n\t.st0{fill:#fff;}\n" }} />
-          </svg>
+    <div id="login">
+      <div className="session">
+        <div className="left">
         </div>
-        <form autoComplete="off" onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h4>
-            We are <span>HERE</span>
-          </h4>
-          <p>Welcome! Sign in to view today's products:</p>
-          <div style={{ marginBottom: '10px' }}>
+        <form className="login" autoComplete="off" onSubmit={handleLogin}>
+          <h4>We are HERE</h4>
+          <p>Welcome! Log In to view today's products:</p>
+          <div className="floatingLabel">
             <input
-              placeholder="username"
+              placeholder=" "
               type="text"
               name="username"
               id="username"
               autoComplete="off"
               onChange={(e) => setUsername(e.target.value)}
-              style={{ padding: '10px', width: '200px' }}
             />
-            <label htmlFor="username" style={{ marginLeft: '10px' }}>username:</label>
+            <label htmlFor="username">username:</label>
           </div>
-          <div style={{ marginBottom: '10px' }}>
+          <div className="floatingLabel">
             <input
-              placeholder="email"
+              placeholder=" "
               type="text"
               name="email"
               id="email"
               autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
-              style={{ padding: '10px', width: '200px' }}
             />
-            <label htmlFor="email" style={{ marginLeft: '10px' }}>email:</label>
+            <label htmlFor="email">email:</label>
           </div>
-          <div style={{ marginBottom: '20px' }}>
+          <div className="floatingLabel">
             <input
-              placeholder="Password"
+              placeholder=" "
               type="password"
               name="password"
               id="password"
               autoComplete="off"
               onChange={(e) => setPassword(e.target.value)}
-              style={{ padding: '10px', width: '200px' }}
             />
-            <label htmlFor="password" style={{ marginLeft: '10px' }}>Password:</label>
+            <label htmlFor="password">Password:</label>
           </div>
-          <button type="submit" style={{ padding: '10px 20px' }}>Log in</button>
+          <button type="submit">Log in</button>
+          {message && <p>{message}</p>}
         </form>
-        {message && <p>{message}</p>}
       </div>
     </div>
   );

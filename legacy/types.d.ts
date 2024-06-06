@@ -34,3 +34,4 @@ interface SellProduct{
     logOut: () => void;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
   }
+  
