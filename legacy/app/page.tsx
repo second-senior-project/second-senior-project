@@ -1,8 +1,8 @@
 "use client"
-import Image from 'next/image';
 import React from 'react'
-
+import { useRouter } from 'next/navigation';
 export default function Home() {
+  const router=useRouter()
   return ( 
     <nav>
  <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
@@ -27,20 +27,19 @@ export default function Home() {
                   About
                 </a>
               </li>
+              
            
             </ul>
+           
+            
           </div>
           <div className="flex items-center gap-x-1 text-black">
-            <button
-              className="hidden px-4 py-2 font-sans text-xs font-bold text-center text-black uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-              type="button">
-              <span className='text-black'>Log In</span>
-            </button>
-            <button
-              className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-              type="button">
-              <span>Sign in</span>
-            </button>
+            
+          <li className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+                <a href="/Signin" className="flex items-center text-blue-gray-900">
+                  Signup
+                </a>
+              </li>
           </div>
           <button
             className="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"
