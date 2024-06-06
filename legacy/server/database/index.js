@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("selling", "root", "Aymen@2003", {
+const sequelize = new Sequelize("selling", "root", "0657firasML", {
   host: "localhost",
   dialect: "mysql",
 });
@@ -22,7 +22,7 @@ db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
 // sequelize
-//   .authenticate()
+//   .sync({force:true})
 //   .then(() => {
 //     console.log("all good");
 //   })

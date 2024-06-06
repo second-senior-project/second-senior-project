@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-// const User = require("../models/UserModels.js");
+const { JWT_SECRET } = require("../config.js");
 const db = require("../database/index.js");
 
 
 async function login(req, res) {
   const { username, email, password } = req.body;
+  console.log("username",username);
   try {
     //user
     const user = await db.User.findOne({ where: { username } });
@@ -25,6 +26,7 @@ async function login(req, res) {
       });
       return res.status(200).json({ token, user });
     } else if (seller) {
+      console.log("teuuuii");
       const PasswordisValid = await bcrypt.compare(
         password,
 
@@ -59,11 +61,12 @@ async function login(req, res) {
     }
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "error" });
+    return res.status(500).json({ message: error });
   }
 }
 async function register(req, res) {
   const { username, email, password, role } = req.body;
+  
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     if (role === "user") {
@@ -129,4 +132,5 @@ async function UpdateUser(req, res) {
     return res.status(500).json({ error: "Server error" });
   }
 }
+
 module.exports = { login, register, UpdateUser };
