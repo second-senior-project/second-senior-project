@@ -1,39 +1,39 @@
-"use client"
-import React, { useState } from "react";
-// import Navbar from "../components/Navbar";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-// import "../styles/Sign.css";
+"use client";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Correct import for Next.js router
+// import Navbar from '../components/Navbar';
+import axios from 'axios';
 
-const Signin: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [role, setRole] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+const Signin = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   const router = useRouter();
 
-  const signup = async () => {
+  const signup = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:4000/api/auth/register", {
+      const response = await axios.post('/api/auth/register', {
         username,
         email,
         password,
         role,
       });
-      setMessage("Signup successful!");
+      setMessage('Signup successful!');
       console.log(message);
-      router.push("/login");
+      router.push('/Signin/Login');
     } catch (error) {
-      console.log(error);
-      setMessage("Signup failed. Please try again.");
+      console.error(error); // Use console.error for logging errors
+      setMessage('Signup failed. Please try again.');
     }
   };
 
   return (
     <div>
-      
-      <div id="sign" style={{ marginTop: "200px" }}>
+      {/* <Navbar /> */}
+      <div id="sign" style={{ marginTop: '200px' }}>
         <div className="session">
           <div className="left">
             <svg
@@ -43,18 +43,15 @@ const Signin: React.FC = () => {
               xmlSpace="preserve"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <style
-                type="text/css"
-                dangerouslySetInnerHTML={{ __html: "\n\t.st0{fill:#fff;}\n" }}
-              />
+              <style type="text/css" dangerouslySetInnerHTML={{ __html: "\n\t.st0{fill:#fff;}\n" }} />
             </svg>
           </div>
-          <form action="" className="log-in" autoComplete="off" onSubmit={(e) => e.preventDefault()}>
+          <form action="" className="login" autoComplete="off" onSubmit={signup}>
             <h4>
               We are <span>HERE</span>
             </h4>
             <p>Welcome! Sign up to view today's products:</p>
-            <div className="floating-label">
+            <div className="floatingLabel">
               <input
                 placeholder="username"
                 type="text"
@@ -65,7 +62,7 @@ const Signin: React.FC = () => {
               />
               <label htmlFor="username">username:</label>
             </div>
-            <div className="floating-label">
+            <div className="floatingLabel">
               <input
                 placeholder="email"
                 type="text"
@@ -76,7 +73,7 @@ const Signin: React.FC = () => {
               />
               <label htmlFor="email">email:</label>
             </div>
-            <div className="floating-label">
+            <div className="floatingLabel">
               <input
                 placeholder="Password"
                 type="password"
@@ -87,7 +84,7 @@ const Signin: React.FC = () => {
               />
               <label htmlFor="password">Password:</label>
             </div>
-            <div className="floating-label">
+            <div className="floatingLabel">
               <input
                 placeholder="Role"
                 type="text"
@@ -98,20 +95,12 @@ const Signin: React.FC = () => {
               />
               <label htmlFor="role">Role:</label>
             </div>
-            <button type="button" onClick={signup}>
-              Sign up
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                router.push("/login");
-              }}
-            >
-              Log in
+            <button type="submit">Sign up</button>
+            <button type="button" onClick={() => router.push('/Signin/Login')}>
+              log in
             </button>
           </form>
           {message && <p>{message}</p>}
-          
         </div>
       </div>
     </div>
