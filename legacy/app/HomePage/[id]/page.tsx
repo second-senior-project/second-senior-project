@@ -1,8 +1,7 @@
 "use client"
 import React from 'react'
 import { usePathname } from 'next/navigation'
-import Image from 'next/image'
-const ProductDetails = ({el}) => {
+const ProductDetails = () => {
     const pathname = usePathname()
   return (
     <div className="product-details">
@@ -13,7 +12,7 @@ const ProductDetails = ({el}) => {
             <Image fill key={index} src='' alt={el.name} className="thumbnail" />
           ))}
         </div> */}
-        <Image fill src="" alt='test' className="main-image" />
+        <img src="https://i.pinimg.com/564x/9c/5e/52/9c5e52d837986993e6053f4581595787.jpg" alt='test' className="main-image" />
       </div>
       <div className="product-info">
         <h1 className="product-title">testjjj</h1>

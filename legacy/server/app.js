@@ -26,7 +26,7 @@ app.use("/api/admin",routeradmin)
 
 app.use("/api", SellerRouter);
 
-app.use("/api/panier", routerPa);
+app.use("/api/Cart", routerPa);
 
 
 app.listen(PORT, () => {

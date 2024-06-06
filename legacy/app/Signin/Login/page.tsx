@@ -23,6 +23,7 @@ export default function Login() {
       setMessage('Login failed. Please try again.');
     }
   };
+console.log(loginAction,"login");
 
   return (
     <div id="login">

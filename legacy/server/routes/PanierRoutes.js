@@ -5,7 +5,7 @@ const {
   remove,
 } = require("../controllers/panierControlle.js");
 
-routerPa.get("/usercart/:userId", getUserCart);
+routerPa.get("/usercart", getUserCart);
 routerPa.post("/usercart", addToPanier);
 routerPa.delete("/del/:productId", remove);
 
