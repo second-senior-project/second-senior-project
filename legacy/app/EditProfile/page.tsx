@@ -74,6 +74,7 @@ const Profile: React.FC = () => {
         const updatedUser = { ...user, ...response.data.user };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
+        console.log('userloggedin',response.data);
         router.push('/');
         toast.success('Profile updated successfully!');
       })
@@ -150,7 +151,7 @@ const Profile: React.FC = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="save-btn">
+                <button type="submit"  className="save-btn">
                   Save Changes
                 </button>
               </div>

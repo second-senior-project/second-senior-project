@@ -1,8 +1,26 @@
 "use client"
-import React from 'react'
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import React,{useEffect,useState} from 'react'
+
+
 export default function Home() {
+  const [data, setData] = useState([]);
   const router=useRouter()
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/products", {
+        headers: localStorage.getItem("token"),
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return ( 
     <nav>
  <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
@@ -10,7 +28,7 @@ export default function Home() {
     <nav
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage"
+        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
@@ -22,23 +40,29 @@ export default function Home() {
                   Contact
                 </a>
               </li>
+             
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/EditProfile" className="flex items-center">
+                  EditProfile
+                </a>
+              </li>
+
+
+
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                 <a href="/About" className="flex items-center text-blue-gray-900">
                   About
                 </a>
               </li>
-              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                <a href="/EditProfile" className="flex items-center text-blue-gray-900">
-                EditProfile
+
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/AddProduct" className="flex items-center">
+                  Add Product
                 </a>
               </li>
               
+           
 
-              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                <a href="/Wishlist" className="flex items-center text-blue-gray-900">
-                  like
-                </a>
-              </li>
             </ul>
            
             

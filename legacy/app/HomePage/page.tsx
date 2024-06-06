@@ -1,22 +1,15 @@
-"use client"
-import React from 'react'
-import Carosel from './Carosel'
-import Products from './Products'
+"use client";
+import React from "react";
+import Carosel from "./Carosel";
+import Products from "./Products";
 
-// import AddProduct from './AddProduct/page'
-const HomePage = () => {
+const Home = () => {
   return (
-<>
+    <>
+      <Carosel />
+      <Products />
+    </>
+  );
+};
 
-<Carosel/>
-<Products/>
-{/* <AddProduct/> */}
-</>
-  )
-}
-
-export default HomePage
-
-
-
-
+export default Home;

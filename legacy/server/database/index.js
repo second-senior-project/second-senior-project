@@ -22,7 +22,7 @@ db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
 // sequelize
-//   .sync()
+//   .sync({force:true})
 //   .then(() => {
 //     console.log("all good");
 //   })
