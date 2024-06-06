@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize("selling", "root", "Aymen@2003", {
+const sequelize = new Sequelize("selling", "root", "root", {
   host: "localhost",
   dialect: "mysql",
 });
@@ -21,22 +21,14 @@ db.Panier = require("../models/panierModel")(sequelize, DataTypes);
 db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("all good");
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
-
 // sequelize
-//   .sync({ force: true })
+//   .sync()
 //   .then(() => {
-//     console.log("Database & tables created!");
+//     console.log("all good");
 //   })
-//   .catch((error) => {
-//     console.error("Error creating database & tables:", error);
+//   .catch((err) => {
+//     console.error("Unable to connect to the database:", err);
 //   });
 
+// ;
 module.exports = db;

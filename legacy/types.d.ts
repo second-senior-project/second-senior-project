@@ -1,3 +1,15 @@
+interface SellProduct{
+    name:string;
+    image:string;
+    sellerProduct:array;
+    id:number;
+    product:array;
+    description:string;
+    src:string;
+    el:any;
+    Product:array;
+}
+
 interface cart {
     name:string,
     total:number,
@@ -10,23 +22,46 @@ interface cart {
     imgUrl:sting
 }
 
+export interface ProfileType {
+  id: string;
+  username: string;
+  email: string;
+}
 
+export interface Passwords {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
 
-
-interface user {
+  interface Item {
     id: number;
-    username: string;
-    email: string;
+    name: string;
+    price: number;
+    oldPrice?: number;
+    image: string;
+  }
+
+   interface Product {
+    id: string;
+    name: string;
+    price: number;
+    quantity?: number;
+    imgUrl: string;
   }
   
-   interface Profile {
-    username: string;
-    email: string;
+   interface User {
+    id: string;
   }
-  
-   interface Passwords {
-    currentPassword: string;
-    newPassword: string;
-    confirmNewPassword: string;
-  }
-  
+
+//  interface WishlistItemType {
+//   id: string;
+//   name: string;
+//   image: string;
+//   price: number;
+//   oldPrice?: number;
+// }
+
+ interface Props {
+  item: WishlistItemType;
+}

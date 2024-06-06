@@ -1,34 +1,38 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
-import '../EditProfile/EditProfile.css'; 
-// import Navbar from '../../components/navbar/Navbar';
-// import Footer from '../../components/footer/Footer';
-// import { useAuth } from '../../context/AuthContext';
+import { useRouter } from 'next/navigation';
+import '../EditProfile/EditProfile.css';
 import toast from 'react-hot-toast';
-// import { Profile as ProfileType, Passwords } from '../../types/types';
+// import { useAuth } from "../context/AuthContext";
+import { ProfileType, Passwords } from './types'; 
 
 const Profile: React.FC = () => {
   const router = useRouter();
-//   const { user, setUser } = useAuth();
-  const [profile, setProfile] = useState({
+  // const { user, setUser } = useAuth(); 
+  const [data,setData]=useState([])
+  const [profile, setProfile] = useState<ProfileType>({
     username: '',
-    email: ''
+    email: '',
+    id: '',
   });
+
   const [passwords, setPasswords] = useState<Passwords>({
     currentPassword: '',
     newPassword: '',
-    confirmNewPassword: ''
+    confirmNewPassword: '',
   });
 
   useEffect(() => {
-    setProfile({
-      username: user.username,
-      email: user.email
-    });
-  }, [user]);
+    if ('test') {
+      setProfile({
+        username: "test",
+        email: "@h.c",
+        id: 1,
+      });
+    }
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,9 +55,9 @@ const Profile: React.FC = () => {
       return;
     }
 
-    const updateFields: Partial<Profile & Passwords> = {
+    const updateFields: Partial<ProfileType & Passwords> = {
       username: profile.username,
-      email: profile.email
+      email: profile.email,
     };
 
     if (passwords.currentPassword && passwords.newPassword) {
@@ -62,11 +66,14 @@ const Profile: React.FC = () => {
     }
 
     axios
-      .put(`http://localhost:4000/api/auth/update/${user.id}`, updateFields)
+      .put(`http://localhost:4000/api/auth/update/${1}`, updateFields)
       .then((response) => {
-        const updatedUser = { ...user, ...response.data.user };
+        // const updatedUser = { ...user, ...response.data.user };
+        setData(data)
         localStorage.setItem('user', JSON.stringify(updatedUser));
-        setUser(updatedUser);
+        console.log("test",response.data);
+        
+        setUser(updatedUser); 
         router.push('/');
         toast.success('Profile updated successfully!');
       })
@@ -81,7 +88,6 @@ const Profile: React.FC = () => {
 
   return (
     <div className="profile">
-      {/* <Navbar /> */}
       <div id="updateprofile">
         <form onSubmit={submit}>
           <div className="profile-form">
@@ -152,7 +158,6 @@ const Profile: React.FC = () => {
           </div>
         </form>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };
