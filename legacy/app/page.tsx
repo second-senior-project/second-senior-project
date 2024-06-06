@@ -1,8 +1,26 @@
 "use client"
-;
-import React from 'react'
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React,{useEffect,useState} from 'react'
 
-export default function HomePage() {
+
+export default function Home() {
+  const [data, setData] = useState([]);
+  const router=useRouter()
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/products", {
+        headers: localStorage.getItem("token"),
+      })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
   return ( 
     <nav>
  <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
@@ -10,7 +28,7 @@ export default function HomePage() {
     <nav
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage"
+        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
@@ -28,24 +46,26 @@ export default function HomePage() {
                   About
                 </a>
               </li>
+
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/AddProduct" className="flex items-center">
                   Add Product
                 </a>
               </li>
+              
+           
+
             </ul>
+           
+            
           </div>
           <div className="flex items-center gap-x-1 text-black">
-            <button
-              className="hidden px-4 py-2 font-sans text-xs font-bold text-center text-black uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-              type="button">
-              <span className='text-black'>Log In</span>
-            </button>
-            <button
-              className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
-              type="button">
-              <span>Sign in</span>
-            </button>
+            
+          <li className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+                <a href="/Signin" className="flex items-center text-blue-gray-900">
+                  Signup
+                </a>
+              </li>
           </div>
           <button
             className="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"

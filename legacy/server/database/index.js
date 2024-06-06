@@ -30,5 +30,5 @@ db.Product.belongsToMany(db.User, { through: db.Panier });
 //     console.error("Unable to connect to the database:", err);
 //   });
 
-;
+// ;
 module.exports = db;
