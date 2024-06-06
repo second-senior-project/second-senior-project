@@ -1,3 +1,14 @@
+interface Product {
+  id: string;
+  username: string;
+  imgUrl: string;
+  category: string;
+  price: number;
+  condition: string;
+  tab:any
+}
+
+
 interface SellProduct{
     name:string;
     image:string;

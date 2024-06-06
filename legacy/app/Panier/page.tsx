@@ -2,33 +2,33 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
-// import { Product, User } from "../types";
+import { Product, User } from "../types";
 import styles from "./panier.css";
 
 const Panier: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [total, setTotal] = useState(0);
   const [refresh, setRefresh] = useState(false);
-  // const { user } = useAuth() as { user: User };
+  const { user } = useAuth() as { user: User };
   const router = useRouter();
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:4000/api/panier/usercart/${user.id}`)
-  //     .then((res) => {
-  //       setProducts(res.data[0].products);
-  //       const sum = res.data[0].products.reduce((acc: number, product: Product) => {
-  //         const productTotal = product.price * (product.quantity || 1);
-  //         return acc + productTotal;
-  //       }, 0);
-  //       setTotal(sum);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, [refresh, user.id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/api/panier/usercart/${user.id}`)
+      .then((res) => {
+        setProducts(res.data[0].products);
+        const sum = res.data[0].products.reduce((acc: number, product: Product) => {
+          const productTotal = product.price * (product.quantity || 1);
+          return acc + productTotal;
+        }, 0);
+        setTotal(sum);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [refresh, user.id]);
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedProducts = [...products];

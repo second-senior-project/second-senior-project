@@ -5,13 +5,12 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import '../EditProfile/EditProfile.css';
 import toast from 'react-hot-toast';
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { ProfileType, Passwords } from './types'; 
 
 const Profile: React.FC = () => {
   const router = useRouter();
-  // const { user, setUser } = useAuth(); 
-  const [data,setData]=useState([])
+  const { user, setUser } = useAuth(); 
   const [profile, setProfile] = useState<ProfileType>({
     username: '',
     email: '',
@@ -25,14 +24,14 @@ const Profile: React.FC = () => {
   });
 
   useEffect(() => {
-    if ('test') {
+    if (user) {
       setProfile({
-        username: "test",
-        email: "@h.c",
-        id: 1,
+        username: user.username,
+        email: user.email,
+        id: user.id,
       });
     }
-  }, []);
+  }, [user]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -66,13 +65,10 @@ const Profile: React.FC = () => {
     }
 
     axios
-      .put(`http://localhost:4000/api/auth/update/${1}`, updateFields)
+      .put(`http://localhost:4000/api/auth/update/${user.id}`, updateFields)
       .then((response) => {
-        // const updatedUser = { ...user, ...response.data.user };
-        setData(data)
+        const updatedUser = { ...user, ...response.data.user };
         localStorage.setItem('user', JSON.stringify(updatedUser));
-        console.log("test",response.data);
-        
         setUser(updatedUser); 
         router.push('/');
         toast.success('Profile updated successfully!');
