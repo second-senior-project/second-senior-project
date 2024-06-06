@@ -90,13 +90,16 @@ export interface Passwords {
   confirmNewPassword: string;
 }
 
-  interface Item {
-    id: number;
-    name: string;
-    price: number;
-    oldPrice?: number;
-    image: string;
-  }
+// interface ItemType {
+//   image: string;
+//   name: string;
+//   price: number;
+//   oldPrice?: number;
+// }
+
+// interface WishlistItemProps {
+//   item: ItemType;
+// }
 
    interface Product {
     id: string;
@@ -110,14 +113,5 @@ export interface Passwords {
     id: string;
   }
 
-//  interface WishlistItemType {
-//   id: string;
-//   name: string;
-//   image: string;
-//   price: number;
-//   oldPrice?: number;
-// }
 
- interface Props {
-  item: WishlistItemType;
-}
+

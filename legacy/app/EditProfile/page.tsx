@@ -22,6 +22,8 @@ const Profile: React.FC = () => {
     confirmNewPassword: '',
   });
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   useEffect(() => {
     if (user) {
       setProfile({
@@ -74,8 +76,7 @@ const Profile: React.FC = () => {
         const updatedUser = { ...user, ...response.data.user };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
-        console.log('userloggedin',response.data);
-        router.push('/');
+        setModalVisible(true); // Show modal on successful update
         toast.success('Profile updated successfully!');
       })
       .catch((error) => {
@@ -85,6 +86,11 @@ const Profile: React.FC = () => {
         );
         console.error('There was an error updating the profile!', error);
       });
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    router.push('/');
   };
 
   return (
@@ -151,7 +157,7 @@ const Profile: React.FC = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit"  className="save-btn">
+                <button type="submit" className="save-btn">
                   Save Changes
                 </button>
               </div>
@@ -159,6 +165,14 @@ const Profile: React.FC = () => {
           </div>
         </form>
       </div>
+      {modalVisible && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Profile Updated Successfully</h2>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
