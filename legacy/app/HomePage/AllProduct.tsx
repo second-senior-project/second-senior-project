@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { IoMdMore } from "react-icons/io";
+// import { IoMdMore } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -61,7 +61,7 @@ const AllProduct = ({ el }) => {
           className="absolute top-4 right-12 h-8 w-8 bg-black rounded-full text-white flex items-center justify-center"
           onClick={toggleMenu}
         >
-          <IoMdMore className="icon" />
+          {/* <IoMdMore className="icon" /> */}
         </button>
         {menuView && (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
