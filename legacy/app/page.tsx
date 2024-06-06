@@ -40,7 +40,13 @@ export default function Home() {
                   Contact
                 </a>
               </li>
-             
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/Panier" className="flex items-center">
+                  panier
+                </a>
+              </li>
+
+
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/EditProfile" className="flex items-center">
                   EditProfile
@@ -58,6 +64,12 @@ export default function Home() {
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/AddProduct" className="flex items-center">
                   Add Product
+                </a>
+              </li>
+
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/Wishlist" className="flex items-center">
+                  like
                 </a>
               </li>
               

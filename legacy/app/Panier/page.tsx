@@ -2,10 +2,9 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../components/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { Product, User } from "../types";
-import styles from "./panier.css";
+import "./panier.css";
 
 const Panier: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -57,9 +56,9 @@ const Panier: React.FC = () => {
   return (
     <div>
       
-      <div className={styles.panierContainer}>
-        <h2>Cart</h2>
-        <table className={styles.cartTable}>
+      <div className="panierContainer">
+        <h2>Panier</h2>
+        <table className="panierTable">
           <thead>
             <tr>
               <th>Product</th>
@@ -73,7 +72,7 @@ const Panier: React.FC = () => {
             {products.map((product, index) => (
               <tr key={product.id}>
                 <td>
-                  <img src={product.imgUrl} alt={product.name} className={styles.productImage} />
+                  <img src={product.imgUrl} alt={product.name} className="productImage"/>
                   {product.name}
                 </td>
                 <td>${product.price}</td>
@@ -83,7 +82,7 @@ const Panier: React.FC = () => {
                     min="1"
                     value={product.quantity || 1}
                     onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
-                    className={styles.quantityInput}
+                    className="quantityInput"
                   />
                 </td>
                 <td>${product.price * (product.quantity || 1)}</td>
@@ -92,19 +91,19 @@ const Panier: React.FC = () => {
             ))}
           </tbody>
         </table>
-        <button className={styles.returnButton} onClick={() => router.push("/")}>
+        <button className="returnButton" onClick={() => router.push("/")}>
           Return To Shop
         </button>
-        <div className={styles.couponContainer}>
-          <input type="text" placeholder="Coupon Code" className={styles.couponInput} />
-          <button className={styles.applyCoupon}>Apply Coupon</button>
+        <div className="couponContainer">
+          <input type="text" placeholder="Coupon Code" className="couponInput" />
+          <button className="applyCoupon">Apply Coupon</button>
         </div>
-        <div className={styles.cartTotal}>
-          <h3>Cart Total</h3>
+        <div className="cartTotal">
+          <h3>Panier Total</h3>
           <p>Subtotal: ${total}</p>
           <p>Shipping: Free</p>
           <p>Total: ${total}</p>
-          <button className={styles.checkoutButton}>Proceed to checkout</button>
+          <button className="checkoutButton">Proceed to checkout</button>
         </div>
       </div>
     </div>
