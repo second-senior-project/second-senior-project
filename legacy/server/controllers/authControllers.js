@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const { JWT_SECRET } = require("../config.js");
 const db = require("../database/index.js");
 
-
 async function login(req, res) {
   const { username, email, password } = req.body;
   console.log("username",username);
@@ -125,7 +124,7 @@ async function UpdateUser(req, res) {
         .status(404)
         .json({ message: "User not found or no changes detected" });
     }
-
+console.log('update',res);
     return res.status(200).json({ message: "Profile updated successfully" });
   } catch (err) {
     console.error("Error updating profile:", err.message);
