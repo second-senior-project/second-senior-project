@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode,useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   const router = useRouter();
-
+ 
   const loginAction = async (data: any) => {
     try {
       const response = await axios.post("http://localhost:4000/api/auth/login", data);
@@ -61,11 +61,11 @@ console.log(response,"response");
     localStorage.removeItem("seller");
     localStorage.removeItem("admin");
     toast.success("Logged out successfully");
-    router.push("/login");
+    router.push("/Signin/Login");
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser }}>
+    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser}}>
       {children}
     </AuthContext.Provider>
   );

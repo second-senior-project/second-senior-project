@@ -4,8 +4,14 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
+
 const AllProduct = ({ el }) => {
   const router = useRouter();
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [update, setUpdate] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [menuView, setMenuView] = useState<boolean>(false);
@@ -18,9 +24,9 @@ const AllProduct = ({ el }) => {
     setMenuView(!menuView);
   };
 
-  const deleteProd = (id) => {
+  const deleteProd = () => {
     axios
-      .delete(`http://localhost:4000/api/products/${1}`)
+      .delete(`http://localhost:4000/api/products/${el.id}`)
       .then(() => {
         setUpdate(!update);
         router.push("/HomePage");
@@ -32,6 +38,31 @@ const AllProduct = ({ el }) => {
       axios.post("http://localhost:4000/api/Cart/usercart")
     
     }
+    
+  const updateProd = () => {
+    axios
+      .put(`http://localhost:4000/api/seller/${el.id}`, {
+        category,
+        name,
+        price,
+        description,
+        image,
+      })
+      .then((res) => {
+        alert("Product updated successfully");
+        console.log("test",res.data);
+        
+        router.push("/HomePage");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handlup = (e) => {
+    e.preventDefault();
+    console.log("id",el.id);
+    
+    updateProd(el.id);
+  };
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
@@ -67,13 +98,13 @@ const AllProduct = ({ el }) => {
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => router.push("/editProduct", (el = { el }))}
+              onClick={() => router.push("/editProduct", { handlup: handlup })}
             >
               Edit Product
             </span>
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => deleteProd(1)}
+              onClick={deleteProd}
             >
               Delete
             </span>
