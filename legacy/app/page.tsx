@@ -1,8 +1,8 @@
 "use client"
-import Image from 'next/image';
+;
 import React from 'react'
 
-export default function Home() {
+export default function HomePage() {
   return ( 
     <nav>
  <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">

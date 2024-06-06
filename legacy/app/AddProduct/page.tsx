@@ -4,34 +4,35 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const AddProduct = () => {
-  const [data,setData]=useState([])
-const [name, setName] = useState("")
-const [price, setPrice] = useState("")
-const [description, setDescription] = useState("")
-const [category, setCategory] = useState("")
-const [image, setImage] = useState("")
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
 
-const [upd, setUpd] = useState<boolean>(false)
-const route = useRouter();
+  const [upd, setUpd] = useState<boolean>(false);
+  const route = useRouter();
 
- const Add= ()=>{
- axios.post(`http://localhost:4000/api/products`,{
-category:category,
-name:name,price:price,
-description:description
-,image:image
- })
- .then((res)=>{setData(res.data)
-console.log("test",res.data)}
+  const Add = () => {
+    axios
+      .post(`http://localhost:4000/api/products`, {
+        category: category,
+        name: name,
+        price: price,
+        description: description,
+        image: image,
+      })
+      .then((res) => {
+        setData(res.data);
+        route.push("/HomePage");
+      })
 
-)
-
- .catch((err:string)=>console.log(err)
- )
- }
- const handeAdd=()=>{
-Add()
- }
+      .catch((err: string) => console.log(err));
+  };
+  const handeAdd = () => {
+    Add();
+  };
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -39,10 +40,9 @@ Add()
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "product");
-    
+
     try {
       const response = await axios.post(
-      
         "https://api.cloudinary.com/v1_1/dzonlv8oi/image/upload",
 
         formData
@@ -59,7 +59,7 @@ Add()
       <h1 className="text-xl font-bold text-white capitalize dark:text-white">
         Account settings
       </h1>
-     
+
       <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
         <div>
           <label className="text-white dark:text-gray-200" htmlFor="username">
@@ -69,8 +69,8 @@ Add()
             id="username"
             type="text"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -79,9 +79,8 @@ Add()
             Price
           </label>
           <input
-         value={price}
-         onChange={(e)=>setPrice(e.target.value)}
-            
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             type="text"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           />
@@ -92,20 +91,19 @@ Add()
             description
           </label>
           <textarea
- value={description}
- onChange={(e)=>setDescription(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             id="textarea"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           ></textarea>
         </div>
-       
 
         <div>
           <label className="text-white dark:text-gray-200" htmlFor="city">
             category
           </label>
           <select
-          onChange={(e)=>setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value)}
             id="city"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           >
@@ -115,7 +113,6 @@ Add()
             <option>sport</option>
           </select>
         </div>
-
 
         <div>
           <label className="block text-sm font-medium text-white">Image</label>
@@ -152,18 +149,19 @@ Add()
                 </label>
                 <p className="pl-1 text-white">or drag and drop</p>
               </div>
-             
             </div>
           </div>
         </div>
       </div>
 
       <div className="flex justify-end mt-6">
-        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-        onClick={()=>{handeAdd(),console.log("checked")
-        }}
+        <button
+          className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+          onClick={() => {
+            handeAdd(), console.log("checked");
+          }}
         >
-          add 
+          add
         </button>
       </div>
     </section>

@@ -2,31 +2,39 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-const editProduct = ({ el }) => {
-  const router = useRouter<any>();
-  const [data, setData] = useState<Array>([]);
-  const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>("");
-  const [description, setDescription] = useState<string>("");
-  const [category, setCategory] = useState<any>("");
-  const [image, setImage] = useState<string>("");
-  const updateProd = ({el}) => {
+const editProduct = () => {
+  const router = useRouter();
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
+
+  const updateProd = (id) => {
+    console.log("test");
+
     axios
-      .put(`http://localhost:4000/api/seller/${1}`,{category:category,
-      name:name,price:price,
-      description:description
-      ,image:image})
-      .then((res:any) => {
+      .put(`http://localhost:4000/api/seller/${1}`, {
+        category: category,
+        name: name,
+        price: price,
+        description: description,
+        image: image,
+      })
+      .then((res) => {
         alert("Product updated successfully");
-        console.log("test",res.data);
-        
+        setData(data);
+        console.log("test", res.data);
         router.push("/HomePage");
       })
       .catch((err) => console.log(err));
   };
-  const handlup=(id:any)=>{
-    updateProd(el.id)
-  }
+
+  const handlup = (e) => {
+    e.preventDefault();
+    updateProd(1);
+  };
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -60,22 +68,20 @@ const editProduct = ({ el }) => {
               <h2 className="text-grey text-sm mb-4 dark:text-gray-400">
                 Update Your Profile
               </h2>
-              <form>
+              <form onSubmit={handlup}>
                 <div className="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
                   <div className="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
                     <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4">
                       <input
                         type="file"
-                        name="profile"
+                        // name="profile"
                         id="upload_profile"
-                        hidden
-                        required
                         onChange={handleImageUpload}
                       />
                       <label htmlFor="upload_profile">
                         <svg
                           className="w-6 h-5 text-blue-700"
-                          fill="none"
+                          //   fill="none"
                           strokeWidth="1.5"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -102,7 +108,6 @@ const editProduct = ({ el }) => {
                       name="profile"
                       id="upload_cover"
                       hidden
-                    //   required
                       onChange={handleImageUpload}
                     />
                     <div className="bg-white flex items-center gap-1 rounded-tl-md px-2 text-center font-semibold">
@@ -140,33 +145,34 @@ const editProduct = ({ el }) => {
                 </h2>
                 <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full mb-4 mt-6">
-                    <label className="mb-2 dark:text-gray-300">name</label>
+                    <label className="mb-2 dark:text-gray-300">Name</label>
                     <input
                       type="text"
                       className="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                      placeholder=" Name"
+                      placeholder="Name"
                       value={name}
-                      onChange={(e)=>setName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </div>
                   <div className="w-full mb-4 lg:mt-6">
-                    <label className="dark:text-gray-300">price</label>
+                    <label className="dark:text-gray-300">Price</label>
                     <input
-                      type="text"
+                      type="number"
                       className="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                      placeholder="price"
+                      placeholder="Price"
                       value={price}
-                      onChange={(e)=>setPrice(e.target.value)}
+                      onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
                   <div className="w-full">
-                    <h3 className="dark:text-gray-300 mb-2">category</h3>
+                    <h3 className="dark:text-gray-300 mb-2">Category</h3>
                     <select
-                    value={category}
-                    onChange={(e)=>setCategory(e.target.value)}
-                    className="w-full text-grey border-2 rounded-lg p-4 pl-2 pr-2 dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800">
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full text-grey border-2 rounded-lg p-4 pl-2 pr-2 dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
+                    >
                       <option disabled value="">
                         Select category
                       </option>
@@ -176,10 +182,9 @@ const editProduct = ({ el }) => {
                       <option>sport</option>
                     </select>
                   </div>
-                
                 </div>
                 <div className="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                  <button type="submit" className="w-full p-4" onClick={handlup}>
+                  <button type="submit" className="w-full p-4">
                     Submit
                   </button>
                 </div>
