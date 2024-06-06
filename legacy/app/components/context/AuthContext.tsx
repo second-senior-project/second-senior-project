@@ -60,7 +60,7 @@ console.log(response,"response");
     localStorage.removeItem("seller");
     localStorage.removeItem("admin");
     toast.success("Logged out successfully");
-    router.push("/login");
+    router.push("/Signin/Login");
   };
 
   return (

@@ -4,8 +4,10 @@ import { IoMdMore } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
+
 const AllProduct = ({ el }) => {
   const router = useRouter();
+  
   const [update, setUpdate] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [menuView, setMenuView] = useState<boolean>(false);
@@ -18,9 +20,9 @@ const AllProduct = ({ el }) => {
     setMenuView(!menuView);
   };
 
-  const deleteProd = (id) => {
+  const deleteProd = () => {
     axios
-      .delete(`http://localhost:4000/api/products/${1}`)
+      .delete(`http://localhost:4000/api/products/${el.id}`)
       .then(() => {
         setUpdate(!update);
         router.push("/HomePage");
@@ -69,7 +71,7 @@ const AllProduct = ({ el }) => {
             </span>
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => deleteProd(1)}
+              onClick={() => deleteProd(id)}
             >
               Delete
             </span>
