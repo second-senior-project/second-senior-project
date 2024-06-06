@@ -58,6 +58,7 @@ console.log(loginAction,"login");
           <div style={{ marginBottom: '10px' }}>
             <input
               placeholder="email"
+              
               type="text"
               name="email"
               id="email"

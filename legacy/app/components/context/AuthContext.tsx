@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 const AuthContext = createContext(undefined);
 
+
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
   const [seller, setSeller] = useState(JSON.parse(localStorage.getItem("seller") || "null"));
@@ -74,7 +75,7 @@ export const useAuth = ()=> {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider");
-    if (context === undefined){}
+    
   }
   return context;
 };

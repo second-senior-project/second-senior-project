@@ -41,6 +41,14 @@ export default function Home() {
                 </a>
               </li>
              
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/EditProfile" className="flex items-center">
+                  EditProfile
+                </a>
+              </li>
+
+
+
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                 <a href="/About" className="flex items-center text-blue-gray-900">
                   About
