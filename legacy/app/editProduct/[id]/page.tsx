@@ -1,23 +1,34 @@
-"use client";
-import React, { useState ,useEffect} from "react";
+"use client"
+import React,{ useState } from "react";
 import axios from "axios";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 
 
-const editProduct = ({handlup}) => {
+
+const EditProduct = ({ el }) => {
+  const pathname = usePathname()
   const router = useRouter();
-  const pathName = usePathname();
-  
-  const [data, setData] = useState([]);
+  const[data,setData]=useState([])
+console.log("pathname",pathname.slice(pathname.length-1))
+ 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
+  const getId = (url) => {
+    const parts = url.split("/");
+    const potentialId = parts[parts.length - 1];
   
   
-
-
+    const parsedId = parseInt(potentialId, 10);
+    if (!isNaN(parsedId) && Number.isInteger(parsedId)) {
+      return parsedId;
+    } else {
+      return null;
+    }
+  };
+ const id=getId(pathname)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -28,8 +39,7 @@ const editProduct = ({handlup}) => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dzonlv8oi/image/upload",
-
+        "https://api.cloudinary.com/v1_1/dprzhdb9r/image/upload",
         formData
       );
 
@@ -39,32 +49,53 @@ const editProduct = ({handlup}) => {
       console.error("Error uploading image:", error);
     }
   };
+
+  const updateProd = () => {
+    axios
+      .put(`http://localhost:4000/api/seller/${id}`, {
+        category,
+        name,
+        price,
+        description,
+        image,
+      })
+      .then((res) => {
+        alert("Product updated successfully");
+        console.log("test", res.data);
+        setData(res.data)
+        router.push("/HomePage"); 
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <section className="py-10 my-auto dark:bg-gray-900">
         <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
           <div className="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
             <div>
-              <h1 className="lg:text-3xl md:text-2xl sm:text-xl xs:text-xl font-serif font-extrabold mb-2 dark:text-white">
+            <span
+            className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
+            
+                >
                 Edit Product
-              </h1>
+                </span>
               <h2 className="text-grey text-sm mb-4 dark:text-gray-400">
                 Update Your Product
               </h2>
-              <form onSubmit={handlup}>
+              <form onSubmit={updateProd}>
                 <div className="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
                   <div className="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
                     <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4">
                       <input
                         type="file"
-                        // name="profile"
+                     
                         id="upload_profile"
                         onChange={handleImageUpload}
                       />
                       <label htmlFor="upload_profile">
                         <svg
                           className="w-6 h-5 text-blue-700"
-                          //   fill="none"
+                          
                           strokeWidth="1.5"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -180,4 +211,4 @@ const editProduct = ({handlup}) => {
   );
 };
 
-export default editProduct;
+export default EditProduct;

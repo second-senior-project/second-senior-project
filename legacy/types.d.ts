@@ -48,6 +48,7 @@ interface User {
   price: number;
   condition: string;
   tab:any
+  handlup:any
 }
 
 
