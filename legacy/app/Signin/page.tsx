@@ -32,7 +32,7 @@ const Signin = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+     
       <div id="sign" style={{ marginTop: '200px' }}>
         <div className="session">
           <div className="left">

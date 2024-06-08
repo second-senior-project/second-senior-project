@@ -41,7 +41,7 @@ const AllProduct = ({ el }) => {
     
   const updateProd = () => {
     axios
-      .put(`http://localhost:4000/api/seller/${el.id}`, {
+      .put(`http://localhost:4000/api/seller/${id}`, {
         category,
         name,
         price,
@@ -59,9 +59,9 @@ const AllProduct = ({ el }) => {
 
   const handlup = (e) => {
     e.preventDefault();
-    console.log("id",el.id);
+    console.log("id",el);
     
-    updateProd(el.id);
+    updateProd();
   };
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">

@@ -7,7 +7,6 @@ const sequelize = new Sequelize("selling", "root", "0657firasML", {
 
 const db = {};
 db.sequelize = sequelize;
-
 db.Product = require("../models/ProductModels")(sequelize, DataTypes);
 db.User = require("../models/UserModels")(sequelize, DataTypes);
 
