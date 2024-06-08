@@ -10,6 +10,7 @@ const AllProduct = ({ el }) => {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [update, setUpdate] = useState<boolean>(false);
@@ -39,35 +40,13 @@ const AllProduct = ({ el }) => {
     
     }
     
-  const updateProd = () => {
-    axios
-      .put(`http://localhost:4000/api/seller/${el.id}`, {
-        category,
-        name,
-        price,
-        description,
-        image,
-      })
-      .then((res) => {
-        alert("Product updated successfully");
-        console.log("test",res.data);
-        
-        router.push("/HomePage");
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handlup = (e) => {
-    e.preventDefault();
-    console.log("id",el.id);
-    
-    updateProd(el.id);
-  };
+  
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
         <img
-          src="https://i.pinimg.com/564x/9c/5e/52/9c5e52d837986993e6053f4581595787.jpg"
+          // src={el.imgUrl}
+          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84Fy08oMXKt99j3kD-x7c4s3YMMnWA5fbFA&s'
           alt="ui/ux review check"
         />
         <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
@@ -92,13 +71,13 @@ const AllProduct = ({ el }) => {
           className="absolute top-4 right-12 h-8 w-8 bg-black rounded-full text-white flex items-center justify-center"
           onClick={toggleMenu}
         >
-          {/* <IoMdMore className="icon" /> */}
+          
         </button>
         {menuView && (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => router.push("/editProduct", { handlup: handlup })}
+              onClick={() => router.push(`/editProduct/${el.id}`)}
             >
               Edit Product
             </span>
@@ -153,7 +132,7 @@ const AllProduct = ({ el }) => {
           Buy
         </button>
       </div>
-    </div>
+    </div>  
   );
 };
 
