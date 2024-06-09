@@ -30,12 +30,16 @@ const AddProduct = () => {
         route.push("/HomePage");
       })
 
-      .catch((err: string) => console.log(err));
+      .catch((err) => {
+        console.error("Error:", err.response ? err.response.data : err.message);
+      });
   };
   const handeAdd = () => {
     Add();
   };
   const handleImageUpload = async (e) => {
+    console.log("testimg");
+    
     const file = e.target.files[0];
     setImgUrl(file);
 
@@ -45,7 +49,7 @@ const AddProduct = () => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dzonlv8oi/image/upload",
+        "https://api.cloudinary.com/v1_1/dprzhdb9r/image/upload",
 
         formData
       );

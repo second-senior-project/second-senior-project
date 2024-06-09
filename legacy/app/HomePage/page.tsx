@@ -2,6 +2,8 @@
 import React from "react";
 import Carosel from "./Carosel";
 import Products from "./Products";
+import Category from "../Category/Page"
+
 import WishlistItem from '../Wishlist/page';
 
 const Home = () => {
@@ -16,6 +18,7 @@ const Home = () => {
     <>
       <Carosel />
       <Products />
+      <Category/>
       <div>
         <WishlistItem item={item} />
       </div>
