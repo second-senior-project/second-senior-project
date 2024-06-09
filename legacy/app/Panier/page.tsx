@@ -1,111 +1,75 @@
-"use client"
+"use client";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../components/context/AuthContext";
 import { useRouter } from "next/navigation";
-import "./panier.css";
+import "./Panier.css";
 
-const Panier: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [total, setTotal] = useState(0);
+const Panier = () => {
+  const [products, setProducts] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const { user } = useAuth() as { user: User };
+  const { cartItems, addToCart, removeFromCart, clearCart } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:4000/api/panier/usercart/${user.id}`)
-      .then((res) => {
-        setProducts(res.data[0].products);
-        const sum = res.data[0].products.reduce((acc: number, product: Product) => {
-          const productTotal = product.price * (product.quantity || 1);
-          return acc + productTotal;
-        }, 0);
-        setTotal(sum);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [refresh, user.id]);
-
-  const handleQuantityChange = (index: number, newQuantity: number) => {
-    const updatedProducts = [...products];
-    updatedProducts[index].quantity = newQuantity;
-
-    const newTotal = updatedProducts.reduce((acc, product) => {
-      const productTotal = product.price * (product.quantity || 1);
-      return acc + productTotal;
-    }, 0);
-
-    setProducts(updatedProducts);
-    setTotal(newTotal);
-  };
-
-  const removeProduct = (productId: string) => {
-    axios
-      .delete(`http://localhost:4000/api/panier/del/${productId}`)
-      .then((response) => {
-        setRefresh(!refresh);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const calculateTotalPrice = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
   return (
-    <div>
-      
-      <div className="panierContainer">
-        <h2>Panier</h2>
-        <table className="panierTable">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-              <th>Delete</th>
+    <div className="panier-container">
+      <div className="breadcrumb">Home / Cart</div>
+      <h2>Cart</h2>
+      <table className="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cartItems.map((item) => (
+            <tr key={item.id}>
+              <td>
+                <div className="flex gap-4 items-center">
+                  <img src="https://res.klook.com/image/upload/c_fill,w_750,h_500/q_80/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/tsah7c9evnal289z5fig.jpg" alt={item.title} className="product-image" />
+                  <div>{item.name}</div>
+                </div>
+              </td>
+              <td>${item.price}</td>
+              <td>{item.quantity}</td>
+              <td>${(item.price * item.quantity).toFixed(2)}</td>
+              <td>
+                <button
+                  className="apply-coupon"
+                  onClick={() => addToCart(item)}
+                >
+                  +
+                </button>
+                <button
+                  className="apply-coupon"
+                  onClick={() => removeFromCart(item)}
+                >
+                  -
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {products.map((product, index) => (
-              <tr key={product.id}>
-                <td>
-                  <img src={product.imgUrl} alt={product.name} className="productImage"/>
-                  {product.name}
-                </td>
-                <td>${product.price}</td>
-                <td>
-                  <input
-                    type="number"
-                    min="1"
-                    value={product.quantity || 1}
-                    onChange={(e) => handleQuantityChange(index, parseInt(e.target.value))}
-                    className="quantityInput"
-                  />
-                </td>
-                <td>${product.price * (product.quantity || 1)}</td>
-                <td onClick={() => removeProduct(product.id)}>X</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <button className="returnButton" onClick={() => router.push("/")}>
-          Return To Shop
-        </button>
-        <div className="couponContainer">
-          <input type="text" placeholder="Coupon Code" className="couponInput" />
-          <button className="applyCoupon">Apply Coupon</button>
+          ))}
+        </tbody>
+      </table>
+      {cartItems.length > 0 ? (
+        <div className="cart-total">
+          <h3>Total: ${calculateTotalPrice()}</h3>
+          <button className="checkout-button" onClick={clearCart}>
+            Clear Cart
+          </button>
         </div>
-        <div className="cartTotal">
-          <h3>Panier Total</h3>
-          <p>Subtotal: ${total}</p>
-          <p>Shipping: Free</p>
-          <p>Total: ${total}</p>
-          <button className="checkoutButton">Proceed to checkout</button>
-        </div>
-      </div>
+      ) : (
+        <h3>Your cart is empty</h3>
+      )}
     </div>
   );
 };

@@ -9,7 +9,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   const [upd, setUpd] = useState<boolean>(false);
   const route = useRouter();
@@ -21,10 +21,12 @@ const AddProduct = () => {
         name: name,
         price: price,
         description: description,
-        image: image,
+        imgUrl: imgUrl,
       })
       .then((res) => {
         setData(res.data);
+        console.log(res.data,"res");
+        
         route.push("/HomePage");
       })
 
@@ -35,7 +37,7 @@ const AddProduct = () => {
   };
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    setImgUrl(file);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -49,7 +51,7 @@ const AddProduct = () => {
       );
 
       console.log("Image uploaded successfully:", response.data);
-      setImage(response.data.secure_url);
+      setImgUrl(response.data.secure_url);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -143,7 +145,7 @@ const AddProduct = () => {
                     name="file-upload"
                     type="file"
                     className="sr-only"
-                    // value={image}
+                    // value={imgUrl}
                     onChange={handleImageUpload}
                   />
                 </label>

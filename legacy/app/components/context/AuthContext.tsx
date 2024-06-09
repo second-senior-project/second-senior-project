@@ -63,9 +63,66 @@ console.log(response,"response");
     toast.success("Logged out successfully");
     router.push("/Signin/Login");
   };
+  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
+
+  const addToCart = (item:any)=> {
+    const isItemInCart = cartItems.find((cartItem:any) => cartItem.id === item.id);
+
+    if (isItemInCart) {
+      setCartItems(
+        cartItems.map((cartItem:any) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (item:any) => {
+    const isItemInCart = cartItems.find((cartItem:any) => cartItem.id === item.id);
+
+    if (isItemInCart.quantity === 1) {
+      setCartItems(cartItems.filter((cartItem:any) => cartItem.id !== item.id));
+    } else {
+      setCartItems(
+        cartItems.map((cartItem:any) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        )
+      );
+    }
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce((total:any, item:any) => total + item.price * item.quantity, 0);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      setCartItems(JSON.parse(cartItems));
+    }
+  }, []);
+
 
   return (
-    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser}}>
+    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser, cartItems,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      getCartTotal,}}>
       {children}
     </AuthContext.Provider>
   );

@@ -10,11 +10,16 @@ interface ItemType {
   oldPrice?: number;
 }
 
+
 interface WishlistItemProps {
   item: ItemType;
 }
 
 const WishlistItem: React.FC<WishlistItemProps> = ({ item }) => {
+  if (!item) {
+    return <div className="card">No item provided</div>;
+  }
+
   console.log('item:', item); 
   return (
     <div className="card">

@@ -67,7 +67,7 @@ interface cart {
     name:string,
     total:number,
     el:error,
-    id:number,
+    id:any,
     product:string,
     Product:string,
     price:number,

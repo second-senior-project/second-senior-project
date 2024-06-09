@@ -12,7 +12,6 @@ import { useAuth } from './components/context/AuthContext';
 
 export default function Home() {
   const router=useRouter()
-
   
   const [data, setData] = useState([]);
   const { user, seller, admin, logOut ,token} = useAuth();
@@ -38,7 +37,7 @@ export default function Home() {
         headers: localStorage.getItem("token"),
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       })
       .catch((err) => {
@@ -52,7 +51,7 @@ export default function Home() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       })
       .catch((err) => {
@@ -62,11 +61,11 @@ export default function Home() {
 
   const renderNavBar = () => {
     if (admin) {
-      return <AdminNavBar toggleMenu={toggleMenu} menuView={menuView}  signout={signOut}/>;
+      return <AdminNavBar toggleMenu={toggleMenu} menuView={menuView}  signout={signOut} router={router}/>;
     } else if (seller) {
-      return <SellerNavBar  toggleMenu={toggleMenu} menuView={menuView} signout={signOut}/>;
+      return <SellerNavBar  toggleMenu={toggleMenu} menuView={menuView} signout={signOut} router={router}/>;
     } else if (user) {
-      return <UserNavBar  toggleMenu={toggleMenu}menuView={menuView} signout={signOut}/>;
+      return <UserNavBar  toggleMenu={toggleMenu}menuView={menuView} signout={signOut} router={router}/>;
     } else {
       return <DefaultNavBar />;
     }
@@ -75,14 +74,14 @@ export default function Home() {
   return <nav>{renderNavBar()}</nav>;
 }
 
-const AdminNavBar = ({toggleMenu,menuView,signout}) => 
+const AdminNavBar = ({toggleMenu,menuView,signout,router}) => 
   (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
     <nav
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
+        <a href="/HomePage" onClick={()=>router.push('/HomePage')}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
         Dashbord
         </a>
@@ -100,22 +99,17 @@ const AdminNavBar = ({toggleMenu,menuView,signout}) =>
                   User
                 </a>
               </li>
-
-
-
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                 <a href="/About" className="flex items-center text-blue-gray-900">
                   About
                 </a>
               </li>
-
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/AddProduct" className="flex items-center">
                 <IoMdAdd />  Add Product
                 </a>
               </li>
               
-           
 
             </ul>
            
@@ -144,13 +138,13 @@ const AdminNavBar = ({toggleMenu,menuView,signout}) =>
   </div>
 );
 
-const SellerNavBar = ({toggleMenu,menuView,signout}) => (
+const SellerNavBar = ({toggleMenu,menuView,signout,router}) => (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
     <nav
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
+        <a href="/HomePage" onClick={()=>router.push('/HomePage')}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
@@ -215,7 +209,7 @@ const SellerNavBar = ({toggleMenu,menuView,signout}) => (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => router.push("/EditProfile", (el = { el }))}
+              onClick={() => router.push("/EditProfile")}
             >
             <FaRegEdit />  
             </span>
@@ -235,13 +229,13 @@ const SellerNavBar = ({toggleMenu,menuView,signout}) => (
   </div>
 );
 
-const UserNavBar = (toggleMenu,menuView,signout) => (
+const UserNavBar = ({toggleMenu,menuView,signout,router}) => (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
     <nav
       className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
+        <a href="/HomePage" onClick={()=>router.push('/HomePage')}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
@@ -256,6 +250,11 @@ const UserNavBar = (toggleMenu,menuView,signout) => (
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                 <a href="/About" className="flex items-center text-blue-gray-900">
                   About
+                </a>
+              </li>
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                <a href="/Panier" className="flex items-center text-blue-gray-900">
+                  panier
                 </a>
               </li>
             </ul>
@@ -279,7 +278,7 @@ const UserNavBar = (toggleMenu,menuView,signout) => (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => router.push("/WishList", (el = { el }))}
+              onClick={() => router.push("/Wishlist")}
             >
               WishList
             </span>
@@ -287,7 +286,7 @@ const UserNavBar = (toggleMenu,menuView,signout) => (
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
               onClick={() => signout()}
             >
-              Delete
+            logout
             </span>
           </div>
         )}
@@ -310,12 +309,12 @@ const UserNavBar = (toggleMenu,menuView,signout) => (
   </div>
 );
 
-const DefaultNavBar = () => (
+const DefaultNavBar = ({router}) => (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
    <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
    <div className="flex items-center justify-between text-blue-gray-900">
-        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
+        <a href="/HomePage" onClick={()=>router.push('/HomePage')}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
