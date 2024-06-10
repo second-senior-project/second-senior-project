@@ -15,7 +15,7 @@ export default function Login() {
   const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      await loginAction({ username, email, password });
+      await loginAction({ username, email, password});
       setMessage('Login successful!');
       router.push('/');
     } catch (error) {
