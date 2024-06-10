@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from './components/context/AuthContext';
 import router from 'next/router';
 
+
 export default function Home() {
   const router = useRouter();
 
@@ -47,7 +48,8 @@ export default function Home() {
       .then((response) => {
         console.log(response.data);
         setData(response.data);
-      })
+      }) 
+      
       .catch((err) => {
         console.error(err);
       });
@@ -68,6 +70,7 @@ export default function Home() {
   }, [token]);
 
   const renderNavBar = () => {
+<<<<<<< HEAD
     if (admin) {
       return (
         <AdminNavBar
@@ -101,14 +104,24 @@ export default function Home() {
           filter={filter}
         />
       );
+=======
+    // if (admin) {
+      // return <AdminNavBar toggleMenu={toggleMenu} menuView={menuView}  signout={signOut}/>;
+    // } 
+    if (seller) {
+      return <SellerNavBar  toggleMenu={toggleMenu} menuView={menuView} signout={signOut} router={router}/>;
+    } else if (user) {
+      return <UserNavBar  toggleMenu={toggleMenu}menuView={menuView} signout={signOut} router={router}/>;
+>>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
     } else {
-      return <DefaultNavBar />;
+      return <DefaultNavBar router={router} />;
     }
   };
 
   return <nav>{renderNavBar()}</nav>;
 }
 
+<<<<<<< HEAD
 const AdminNavBar = ({
   toggleMenu,
   menuView,
@@ -136,6 +149,34 @@ const AdminNavBar = ({
                     Seller
                   </a>
                 </li>
+=======
+// const AdminNavBar = ({toggleMenu,menuView,signout}) => 
+//   (
+//   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+    {/* <Admin/> */}
+    {/* <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
+    <nav
+      className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+      <div className="flex items-center justify-between text-blue-gray-900">
+        <a href="/HomePage" onClick={()=>router.push('/HomePage',(el={data}))}
+          className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
+        Dashbord
+        </a>
+        <div className="flex items-center gap-4">
+          <div className="hidden mr-4 lg:block">
+            <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/AdminApp"  onClick={()=>router.push('/AdminApp')}  className="flex items-center">
+                  Seller
+                </a>
+              </li>
+             
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/User" className="flex items-center">
+                  User
+                </a>
+              </li>
+>>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
 
                 <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                   <a href="/User" className="flex items-center">
@@ -190,6 +231,7 @@ const AdminNavBar = ({
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       </nav>
     </div>
   </div>
@@ -203,6 +245,15 @@ const SellerNavBar = ({
   setKey,
   filter,
 }) => (
+=======
+      </div>
+    </nav>
+    </div> */}
+  {/* </div>
+); */}
+
+const SellerNavBar = ({toggleMenu,menuView,signout,router}) => (
+>>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
       <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
@@ -292,7 +343,11 @@ const SellerNavBar = ({
   </div>
 );
 
+<<<<<<< HEAD
 const UserNavBar = (toggleMenu, menuView, signout) => (
+=======
+const UserNavBar = (toggleMenu,menuView,signout,router) => (
+>>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
       <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
@@ -381,9 +436,10 @@ const UserNavBar = (toggleMenu, menuView, signout) => (
   </div>
 );
 
-const DefaultNavBar = () => (
+const DefaultNavBar = ({router}) => (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
+<<<<<<< HEAD
       <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
         <div className="flex items-center justify-between text-blue-gray-900">
           <a
@@ -393,6 +449,14 @@ const DefaultNavBar = () => (
           >
             exclusive
           </a>
+=======
+   <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+   <div className="flex items-center justify-between text-blue-gray-900">
+        <a href="/HomePage" onClick={()=>router.push('/HomePage')}
+          className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
+          exclusive
+        </a>
+>>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
         </div>
         <div className="flex items-center gap-x-1 text-black">
           <li className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
