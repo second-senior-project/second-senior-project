@@ -77,7 +77,7 @@ console.log(response,"response");
         )
       );
     } else {
-      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+      setCartItems([...cartItems, { ...item,price:item.price ,quantity: 1 }]);
     }
   };
 

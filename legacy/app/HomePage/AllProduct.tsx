@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-// import { IoMdMore } from "react-icons/io";
+import { IoMdMore } from "react-icons/io";
 import { useRouter,usePathname } from "next/navigation";
 import axios from "axios";
 import { useAuth } from '../components/context/AuthContext';
@@ -169,7 +169,7 @@ const AllProduct = ({ el }) => {
           </p>
         </div>
         <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
-          {el.price}
+          ${el.price}
         </p>
         <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
           {el.category}
