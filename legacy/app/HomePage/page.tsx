@@ -2,12 +2,9 @@
 import React from "react";
 import Carosel from "./Carosel";
 import Products from "./Products";
-<<<<<<< HEAD
-=======
 import Category from "./Category/Page"
 
 
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
 
 const Home = () => {
   const item = {
@@ -20,10 +17,7 @@ const Home = () => {
   return (
     <>
       <Carosel />
-<<<<<<< HEAD
-=======
       <Category/>
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
       <Products />
     </>
   );

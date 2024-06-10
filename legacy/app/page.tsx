@@ -35,17 +35,12 @@ export default function Home() {
 
  
 
-<<<<<<< HEAD
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/products", {
-=======
+
  
 
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/products', {
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -100,13 +95,7 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
 
 
 
-<<<<<<< HEAD
-              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                <a href="/About" className="flex items-center text-blue-gray-900">
-                  About
-                </a>
-              </li>
-=======
+
                 <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                   <a
                     href="/About"
@@ -115,8 +104,6 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
                     About
                   </a>
                 </li>
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
-
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/AddProduct" className="flex items-center">
                   Add Product
@@ -127,9 +114,6 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
                   chat
                 </a>
               </li>
-              
-           
-
             </ul>
            
             <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
