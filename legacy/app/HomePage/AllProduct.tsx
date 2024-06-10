@@ -1,25 +1,22 @@
 "use client";
 import React, { useState } from "react";
-<<<<<<< HEAD
+
 import { IoMdMore } from "react-icons/io";
 import { useRouter,usePathname } from "next/navigation";
 import axios from "axios";
 import { useAuth } from '../components/context/AuthContext';
 
 
-const AllProduct = ({ el }) => {
-  const {user}=useAuth()
-  const  { cartItems, addToCart }=useAuth()
-=======
+// const AllProduct = ({ el }) => {
+//   const {user}=useAuth()
+//   const  { cartItems, addToCart }=useAuth()
 
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import { useAuth } from "../components/context/AuthContext";
+
+
 
 
 const AllProduct = ({ el }) => {
   
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
   const router = useRouter();
   const { user}=useAuth()
   const [data, setData] = useState([]);
@@ -89,42 +86,7 @@ const AllProduct = ({ el }) => {
       });
   };
 
-<<<<<<< HEAD
-    // const addtocart=({product,user})=>{
-    //   axios.post("http://localhost:4000/api/Cart/usercart",{userId:user.id,productId:product.id}).then(   (res)=>console.log("data cart",res.data)
-    //   ).catch(err=>console.log(err)
-    //   )
-    
-    // }
-    // winha el function mta3 el add to wish list 
-  const updateProd = () => {
-    axios
-      .put(`http://localhost:4000/api/seller/${el.id}`, {
-        category,
-        name,
-        price,
-        description,
-        imgUrl,
-      })
-      .then((res) => {
-        alert("Product updated successfully");
-        console.log("test",res.data);
-        
-        router.push("/HomePage");
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handlup = (e) => {
-    e.preventDefault();
-    console.log("id",el.id);
-    
-    updateProd(el.id);
-  };
-
-=======
   
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
@@ -178,11 +140,8 @@ const AllProduct = ({ el }) => {
           <h5
             className="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900"
             onClick={() =>
-<<<<<<< HEAD
-              router.push("/HomePage/OneProduct/id")
-=======
+
               router.push(`OneProduct/${el.id}`)
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
             }
           >
             {el.name}
@@ -215,11 +174,8 @@ const AllProduct = ({ el }) => {
         <button
           className="block w-full select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
-<<<<<<< HEAD
-onClick={()=>addToCart(el.id)}
-=======
+
           onClick={()=>addToPanier(el.id)}
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
         >
           Buy
         </button>
