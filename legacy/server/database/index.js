@@ -21,13 +21,11 @@ db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
 // sequelize
-//   .sync({force:true})
+//   .sync({alter:true})
 //   .then(() => {
 //     console.log("all good");
 //   })
 //   .catch((err) => {
 //     console.error("Unable to connect to the database:", err);
 //   });
-
-// ;
 module.exports = db;

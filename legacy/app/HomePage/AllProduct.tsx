@@ -1,15 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { IoMdMore } from "react-icons/io";
+
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useAuth } from "../components/context/AuthContext";
 
 
 const AllProduct = ({ el }) => {
+  
   const router = useRouter();
+  const { user}=useAuth()
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [update, setUpdate] = useState<boolean>(false);
@@ -33,41 +37,29 @@ const AllProduct = ({ el }) => {
       })
       .catch((err) => console.log(err));
   };
+  const addToPanier = (id: any) => {
+    const data = {
+      UserId: user.id,
+      productId: id,
+    };
 
-    const addtocart=()=>{
-      axios.post("http://localhost:4000/api/Cart/usercart")
-    
-    }
-    
-  const updateProd = () => {
     axios
-      .put(`http://localhost:4000/api/seller/${id}`, {
-        category,
-        name,
-        price,
-        description,
-        image,
-      })
+      .post("http://localhost:4000/api/Cart/usercart", data)
       .then((res) => {
-        alert("Product updated successfully");
-        console.log("test",res.data);
-        
-        router.push("/HomePage");
+       setData(res.data)
+        console.log("res.data=>",res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  const handlup = (e) => {
-    e.preventDefault();
-    console.log("id",el);
-    
-    updateProd();
-  };
+  
   return (
     <div className="relative flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
         <img
-          src="https://i.pinimg.com/564x/9c/5e/52/9c5e52d837986993e6053f4581595787.jpg"
+          src={el.imgUrl}
           alt="ui/ux review check"
         />
         <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
@@ -92,13 +84,13 @@ const AllProduct = ({ el }) => {
           className="absolute top-4 right-12 h-8 w-8 bg-black rounded-full text-white flex items-center justify-center"
           onClick={toggleMenu}
         >
-          <IoMdMore className="icon" />
+          
         </button>
         {menuView && (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
             <span
               className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-              onClick={() => router.push("/editProduct", { handlup: handlup })}
+              onClick={() => router.push(`/editProduct/${el.id}`)}
             >
               Edit Product
             </span>
@@ -116,7 +108,7 @@ const AllProduct = ({ el }) => {
           <h5
             className="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900"
             onClick={() =>
-              router.push("/HomePage/OneProduct/id", (el = { el }))
+              router.push(`OneProduct/${el.id}`)
             }
           >
             {el.name}
@@ -149,11 +141,12 @@ const AllProduct = ({ el }) => {
         <button
           className="block w-full select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
+          onClick={()=>addToPanier(el.id)}
         >
           Buy
         </button>
       </div>
-    </div>
+    </div>  
   );
 };
 

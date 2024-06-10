@@ -48,6 +48,7 @@ interface User {
   price: number;
   condition: string;
   tab:any
+  handlup:any
 }
 
 
@@ -72,7 +73,8 @@ interface cart {
     Product:string,
     price:number,
     quantity:number,
-    imgUrl:sting
+    // imgUrl:sting
+    item:any
 }
 
 export interface ProfileType {

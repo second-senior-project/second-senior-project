@@ -9,7 +9,7 @@ const AddProduct = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   const [upd, setUpd] = useState<boolean>(false);
   const route = useRouter();
@@ -21,21 +21,27 @@ const AddProduct = () => {
         name: name,
         price: price,
         description: description,
-        image: image,
+        imgUrl: imgUrl,
       })
       .then((res) => {
         setData(res.data);
+        console.log(res.data);  
+        
         route.push("/HomePage");
       })
 
-      .catch((err: string) => console.log(err));
+      .catch((err) => {
+        console.error("Error:", err.response ? err.response.data : err.message);
+      });
   };
   const handeAdd = () => {
     Add();
   };
   const handleImageUpload = async (e) => {
+    console.log("testimg");
+    
     const file = e.target.files[0];
-    setImage(file);
+    // setImgUrl(file);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -43,13 +49,13 @@ const AddProduct = () => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dzonlv8oi/image/upload",
+        "https://api.cloudinary.com/v1_1/dgrmh7he5/image/upload",
 
         formData
       );
 
       console.log("Image uploaded successfully:", response.data);
-      setImage(response.data.secure_url);
+      setImgUrl(response.data.secure_url);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -143,7 +149,7 @@ const AddProduct = () => {
                     name="file-upload"
                     type="file"
                     className="sr-only"
-                    // value={image}
+                    // value={imgurl}
                     onChange={handleImageUpload}
                   />
                 </label>

@@ -12,9 +12,58 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [seller, setSeller] = useState(JSON.parse(localStorage.getItem("seller") || "null"));
   const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem("admin") || "null"));
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-
+  const [cartItems, setCartItems] = useState([])
   const router = useRouter();
- 
+  const addToCart = (item) => {
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (isItemInCart) {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (item) => {
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (isItemInCart.quantity === 1) {
+      setCartItems(cartItems.filter((cartItem) => cartItem.id !== item.id));
+    } else {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        )
+      );
+    }
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      setCartItems(JSON.parse(cartItems));
+    }
+  }, []);
   const loginAction = async (data: any) => {
     try {
       const response = await axios.post("http://localhost:4000/api/auth/login", data);
@@ -65,7 +114,11 @@ console.log(response,"response");
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser}}>
+    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser,  cartItems,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      getCartTotal}}>
       {children}
     </AuthContext.Provider>
   );
