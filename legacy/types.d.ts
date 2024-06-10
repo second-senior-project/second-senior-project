@@ -73,7 +73,8 @@ interface cart {
     Product:string,
     price:number,
     quantity:number,
-    imgUrl:sting
+    // imgUrl:sting
+    item:any
 }
 
 export interface ProfileType {

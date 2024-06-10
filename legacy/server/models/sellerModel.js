@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: "seller",
     },
+    
   });
   return Seller;
 };
