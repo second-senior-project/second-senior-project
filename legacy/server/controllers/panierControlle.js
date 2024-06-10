@@ -13,15 +13,9 @@ module.exports = {
         res.json(err);
         console.log(err);
       }
-    })(req.params.userId);
+    })(req.params.id);
   },
-  // getUserCart: (req, res) => {
-  //   db.Panier.findAll()
-  //     .then((result) => {
-  //       res.send(result);
-  //     })
-  //     .catch((err) => res.send(err));
-  // },
+
 
   addToPanier: (req, res) => {
     db.Panier.create({ productId: req.body.productId, UserId: req.body.UserId })

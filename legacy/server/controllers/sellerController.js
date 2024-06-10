@@ -2,6 +2,7 @@ const db = require("../database/index");
 
 
 module.exports = {
+  
     getSellerProd: (req, res) => {
         db.Product.findAll()
           .then((data) => {
