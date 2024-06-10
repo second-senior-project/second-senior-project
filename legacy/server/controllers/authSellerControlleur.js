@@ -46,6 +46,32 @@ async function register(req, res) {
   const { username, password, email } = req.body;
 
   try {
+    async function isUserBlockedByUsername(username) {
+      try {
+        const user = await db.Seller.findOne({
+          where: {
+            username: username,
+            deletedAt: { [Op.ne]: null }
+          },
+          paranoid: false
+        });
+    
+        if (!user) {
+          return false;
+        }
+    
+        const blockedUser = await db.blockedModel.findOne({
+          where: {
+            userId: user.id
+          }
+        });
+    
+        return blockedUser !== null;
+      } catch (error) {
+        console.error('Error checking if user is blocked:', error);
+        throw error;
+      }
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const seller = await db.Seller.create({
       username,
