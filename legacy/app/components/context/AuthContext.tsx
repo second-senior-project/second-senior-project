@@ -112,13 +112,74 @@ console.log(response,"response");
     toast.success("Logged out successfully");
     router.push("/Signin/Login");
   };
+  const [cartItems, setCartItems] = useState(localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [])
+
+  const addToCart = (item:any)=> {
+    const isItemInCart = cartItems.find((cartItem:any) => cartItem.id === item.id);
+
+    if (isItemInCart) {
+      setCartItems(
+        cartItems.map((cartItem:any) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item,price:item.price ,quantity: 1 }]);
+    }
+  };
+
+  const removeFromCart = (item:any) => {
+    const isItemInCart = cartItems.find((cartItem:any) => cartItem.id === item.id);
+
+    if (isItemInCart.quantity === 1) {
+      setCartItems(cartItems.filter((cartItem:any) => cartItem.id !== item.id));
+    } else {
+      setCartItems(
+        cartItems.map((cartItem:any) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        )
+      );
+    }
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const getCartTotal = () => {
+    return cartItems.reduce((total:any, item:any) => total + item.price * item.quantity, 0);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      setCartItems(JSON.parse(cartItems));
+    }
+  }, []);
+
 
   return (
+<<<<<<< HEAD
+    <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser, cartItems,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      getCartTotal,}}>
+=======
     <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser,  cartItems,
       addToCart,
       removeFromCart,
       clearCart,
       getCartTotal}}>
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
       {children}
     </AuthContext.Provider>
   );

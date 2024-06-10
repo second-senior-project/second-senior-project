@@ -13,7 +13,7 @@ const Products = () => {
       .then((res) => {
         setSellerProduct(res.data);
         setUpdate(!update);
-        console.log("test", res.data);
+        // console.log("test", res.data);
       })
       .catch((err) => console.log(err));
   };

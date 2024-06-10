@@ -17,7 +17,7 @@ export default function Login() {
     try {
       await loginAction({ username, email, password});
       setMessage('Login successful!');
-      router.push('/');
+      router.push('/HomePage');
     } catch (error) {
       console.error(error); 
       setMessage('Login failed. Please try again.');
