@@ -62,7 +62,7 @@ const About = () => {
             </svg>
             <span className="card-title">4.6K</span>
           </div>
-          <div className="card-text">Comments</div>
+          <div className="card-text">Sellers Active On Our Site</div>
         </a>
 
         <a href="#" className="card">
@@ -77,7 +77,7 @@ const About = () => {
             </svg>
             <span className="card-title">45</span>
           </div>
-          <div className="card-text">Projects</div>
+          <div className="card-text">Monthly Product Sale</div>
         </a>
 
         <a href="#" className="card">
@@ -92,7 +92,7 @@ const About = () => {
             </svg>
             <span className="card-title">120K</span>
           </div>
-          <div className="card-text">Downloads</div>
+          <div className="card-text">Customers Active On Our Site</div>
         </a>
       </div>
     </>
