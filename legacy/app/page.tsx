@@ -1,21 +1,21 @@
-'use client';
+"use client"
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { FaRegUserCircle } from 'react-icons/fa';
-import { FaRegEdit } from 'react-icons/fa';
-import { IoMdAdd } from 'react-icons/io';
-import { CiLogout } from 'react-icons/ci';
+import { useRouter } from "next/navigation";
+import { FaRegUserCircle } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io"
+import { CiLogout } from "react-icons/ci";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react"
 import { useAuth } from './components/context/AuthContext';
 
 export default function Home() {
-  const router = useRouter();
+  const router=useRouter()
 
-  const [key, setKey] = useState('');
+  
   const [data, setData] = useState([]);
-  const { user, seller, admin, logOut, token } = useAuth();
-
+  const { user, seller, admin, logOut ,token} = useAuth();
+  
   const [open, setOpen] = useState<boolean>(false);
   const [menuView, setMenuView] = useState<boolean>(false);
     const signOut = () => {
@@ -31,20 +31,21 @@ export default function Home() {
   const toggleMenu = () => {
     setMenuView(!menuView);
   };
-  const filter = (searchKey: string) => {
-    const lowercaseSearchKey = searchKey.toLowerCase();
-    const filteredData = data.filter((item) => {
-      const lowercaseSearchKey= searchKey.toLowerCase
-      return item.name.toLowerCase().includes(lowercaseSearchKey);
-    });
-    setData(filteredData);
-  };
+ 
 
+ 
+
+<<<<<<< HEAD
+  useEffect(() => {
+    axios
+      .get("http://localhost:4000/api/products", {
+=======
  
 
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/products', {
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -99,6 +100,13 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
 
 
 
+<<<<<<< HEAD
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                <a href="/About" className="flex items-center text-blue-gray-900">
+                  About
+                </a>
+              </li>
+=======
                 <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                   <a
                     href="/About"
@@ -107,6 +115,7 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
                     About
                   </a>
                 </li>
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
 
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
                 <a href="/AddProduct" className="flex items-center">
@@ -234,33 +243,22 @@ const UserNavBar = ({ toggleMenu, menuView, signOut, router }) => (
 const DefaultNavBar = ({router}) => (
   <div className="grid min-h-[90px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
     <div className="-m-6 max-h-[768px] w-[calc(100%+48px)]">
-<<<<<<< HEAD
-      <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
-        <div className="flex items-center justify-between text-blue-gray-900">
-          <a
-            href="/HomePage"
-            onClick={() => router.push('/HomePage')}
-            className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl"
-          >
-            exclusive
-          </a>
-=======
    <nav className="sticky top-0 z-10 block w-full max-w-full px-4 py-2 text-black bg-white border rounded-none shadow-md h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
    <div className="flex items-center justify-between text-blue-gray-900">
         <a href="/HomePage" onClick={()=>router.push('/HomePage')}
           className="mr-4 block cursor-pointer py-2 font-sans text-base font-medium leading-relaxed text-inherit antialiased text-2xl">
           exclusive
         </a>
->>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
         </div>
-        <div className="flex items-center gap-x-1 text-black">
-          <li className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
-            <a href="/Signin" className="flex items-center text-blue-gray-900">
-              Signup
-            </a>
-          </li>
-        </div>
-      </nav>
+    <div className="flex items-center gap-x-1 text-black">
+            
+            <li className="hidden select-none rounded-lg bg-gradient-to-tr from-gray-900 to-gray-800 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block">
+                  <a href="/Signin" className="flex items-center text-blue-gray-900">
+                    Signup
+                  </a>
+                </li>
+            </div>
+            </nav>
     </div>
   </div>
 );

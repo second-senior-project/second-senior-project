@@ -25,7 +25,11 @@ const AddProduct = () => {
       })
       .then((res) => {
         setData(res.data);
+<<<<<<< HEAD
+        console.log(res.data,"res");
+=======
         console.log(res.data);  
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
         
         route.push("/HomePage");
       })
@@ -149,7 +153,11 @@ const AddProduct = () => {
                     name="file-upload"
                     type="file"
                     className="sr-only"
+<<<<<<< HEAD
+                    // value={imgUrl}
+=======
                     // value={imgurl}
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
                     onChange={handleImageUpload}
                   />
                 </label>

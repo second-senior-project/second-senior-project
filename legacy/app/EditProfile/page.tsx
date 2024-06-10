@@ -76,7 +76,11 @@ const Profile: React.FC = () => {
         const updatedUser = { ...user, ...response.data.user };
         localStorage.setItem('user', JSON.stringify(updatedUser));
         setUser(updatedUser);
+<<<<<<< HEAD
+        setModalVisible(true); 
+=======
         setModalVisible(true); // Show modal on successful update
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
         toast.success('Profile updated successfully!');
       })
       .catch((error) => {

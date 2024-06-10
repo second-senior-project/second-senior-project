@@ -1,6 +1,10 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
+<<<<<<< HEAD
+const sequelize = new Sequelize("selling", "root", "root", {
+=======
 const sequelize = new Sequelize("selling", "root", "0657firasML", {
+>>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
   host: "localhost",
   dialect: "mysql",
 });
