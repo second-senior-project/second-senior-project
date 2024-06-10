@@ -1,11 +1,10 @@
 "use client"
 import axios from "axios";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Correct import for useRouter
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFutbol, faGamepad, faMobileAlt, faDesktop, faUtensils, faFish } from "@fortawesome/free-solid-svg-icons";
 import './Cats.css';
-
 
 const Category = () => {
   const cats = [
@@ -17,15 +16,15 @@ const Category = () => {
     { name: "FISHING", icon: faFish },
   ];
 
-  const [cat, setCat] = useState([]);
+  const [cat, setCat] = useState({}); // Initialize as an object, not an array
   const router = useRouter();
 
-  const getByCategory = (category:any) => {
+  const getByCategory = (category) => {
     axios
       .get(`http://localhost:4000/api/products/category/${category}`)
       .then((response) => {
         setCat(response.data);
-        router.push('/HomePage/Category');
+        router.push('/HomePage/Category'); // Ensure this path matches your actual route
       })
       .catch((err) => {
         console.error("Error fetching data:", err);
