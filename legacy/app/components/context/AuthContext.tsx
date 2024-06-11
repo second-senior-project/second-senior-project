@@ -12,7 +12,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [seller, setSeller] = useState(JSON.parse(localStorage.getItem("seller") || "null"));
   const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem("admin") || "null"));
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-
   const router = useRouter();
  
   const loginAction = async (data: any) => {
@@ -63,6 +62,10 @@ console.log(response,"response");
     toast.success("Logged out successfully");
     router.push("/Signin/Login");
   };
+
+ 
+
+
 
   return (
     <AuthContext.Provider value={{ token, user, admin, seller, loginAction, logOut, setUser}}>

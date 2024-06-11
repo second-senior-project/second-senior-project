@@ -1,17 +1,12 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-<<<<<<< HEAD
 const sequelize = new Sequelize("selling", "root", "Aymen@2003", {
-=======
-const sequelize = new Sequelize("selling", "root", "root", {
->>>>>>> 168402039adc67d75a2338f87d104eeaf3a9879e
   host: "localhost",
   dialect: "mysql",
 });
 
 const db = {};
 db.sequelize = sequelize;
-
 db.Product = require("../models/ProductModels")(sequelize, DataTypes);
 db.User = require("../models/UserModels")(sequelize, DataTypes);
 
@@ -25,14 +20,12 @@ db.Panier = require("../models/panierModel")(sequelize, DataTypes);
 db.User.belongsToMany(db.Product, { through: db.Panier });
 db.Product.belongsToMany(db.User, { through: db.Panier });
 
-// sequelize
-//   .sync({force:true})
-//   .then(() => {
-//     console.log("all good");
-//   })
-//   .catch((err) => {
-//     console.error("Unable to connect to the database:", err);
-//   });
-
-// ;
+sequelize
+  .sync({alter:true})
+  .then(() => {
+    console.log("all good");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
 module.exports = db;

@@ -1,13 +1,29 @@
 'use client';
 
-
 import React from 'react';
 import "./Wishlist.css";
 
-const WishlistItem: React.FC= ({ item }) => {
+interface ItemType {
+  imgUrl: string;
+  name: string;
+  price: number;
+  oldPrice?: number;
+}
+
+
+interface WishlistItemProps {
+  item: ItemType;
+}
+
+const WishlistItem: React.FC<WishlistItemProps> = ({ item }) => {
+  if (!item) {
+    return <div className="card">No item provided</div>;
+  }
+
+  console.log('item:', item); 
   return (
     <div className="card">
-      <img src={item.image} alt={item.name} />
+      <img src={item.imgUrl} alt={item.name} />
       <div className="details">
         <h3>{item.name}</h3>
         <p className="price">

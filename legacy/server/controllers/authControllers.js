@@ -7,14 +7,14 @@ async function login(req, res) {
   const { username, email, password } = req.body;
   console.log("username",username);
   try {
-    //user
+  
     const user = await db.User.findOne({ where: { username } });
-    //seller
+
     const seller = await db.Seller.findOne({ where: { username } });
-    //admin
+  
     const admin = await db.admin.findOne({ where: { username } });
     console.log(user, admin, seller);
-    //user
+  
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) {
@@ -44,9 +44,7 @@ async function login(req, res) {
       return res.status(200).json({ tokenSeller, seller });
     } else if (admin) {
       const validpassword = await bcrypt.compare(password, admin.password);
-      //  if(!validpassword){
-      //   return res.status(401).json({message :"invalid password"})
-      //  }
+   
       const tokenadmin = jwt.sign(
         { adminId: admin.id, role: admin.role },
         JWT_SECRET,

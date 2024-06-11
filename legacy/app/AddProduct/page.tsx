@@ -25,6 +25,8 @@ const AddProduct = () => {
       })
       .then((res) => {
         setData(res.data);
+        console.log(res.data);  
+        
         route.push("/HomePage");
       })
 
@@ -39,7 +41,7 @@ const AddProduct = () => {
     console.log("testimg");
     
     const file = e.target.files[0];
-    setImgUrl(file);
+  
 
     const formData = new FormData();
     formData.append("file", file);
@@ -47,7 +49,7 @@ const AddProduct = () => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dprzhdb9r/image/upload",
+        "https://api.cloudinary.com/v1_1/dfn7keii6/image/upload",
 
         formData
       );
@@ -147,7 +149,7 @@ const AddProduct = () => {
                     name="file-upload"
                     type="file"
                     className="sr-only"
-                    // value={image}
+                    // value={imgurl}
                     onChange={handleImageUpload}
                   />
                 </label>
