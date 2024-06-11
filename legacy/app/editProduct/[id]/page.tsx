@@ -15,7 +15,7 @@ console.log("pathname",pathname.slice(pathname.length-1))
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const getId = (url) => {
     const parts = url.split("/");
     const potentialId = parts[parts.length - 1];
@@ -31,7 +31,7 @@ console.log("pathname",pathname.slice(pathname.length-1))
  const id=getId(pathname)
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    
 
     const formData = new FormData();
     formData.append("file", file);
@@ -39,12 +39,12 @@ console.log("pathname",pathname.slice(pathname.length-1))
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dprzhdb9r/image/upload",
+        "https://api.cloudinary.com/v1_1/dgrmh7he5/image/upload",
         formData
       );
 
       console.log("Image uploaded successfully:", response.data);
-      setImage(response.data.secure_url);
+      setImgUrl(response.data.secure_url);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -57,7 +57,7 @@ console.log("pathname",pathname.slice(pathname.length-1))
         name,
         price,
         description,
-        image,
+        imgUrl,
       })
       .then((res) => {
         alert("Product updated successfully");
@@ -69,144 +69,118 @@ console.log("pathname",pathname.slice(pathname.length-1))
   };
   return (
     <>
-      <section className="py-10 my-auto dark:bg-gray-900">
-        <div className="lg:w-[80%] md:w-[90%] xs:w-[96%] mx-auto flex gap-4">
-          <div className="lg:w-[88%] md:w-[80%] sm:w-[88%] xs:w-full mx-auto shadow-2xl p-4 rounded-xl h-fit self-center dark:bg-gray-800/40">
-            <div>
-            <span
-            className="block px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
-            
+        <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-20 mb-20">
+      <h1 className="text-xl font-bold text-white capitalize dark:text-white">
+        Update your product 
+      </h1>
+
+      <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+        <div>
+          <label className="text-white dark:text-gray-200" htmlFor="username">
+            name
+          </label>
+          <input
+            id="username"
+            type="text"
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label className="text-white dark:text-gray-200" htmlFor="price">
+            Price
+          </label>
+          <input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="text"
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          />
+        </div>
+
+        <div>
+          <label className="text-white dark:text-gray-200" htmlFor="textarea">
+            description
+          </label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            id="textarea"
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          ></textarea>
+        </div>
+
+        <div>
+          <label className="text-white dark:text-gray-200" htmlFor="city">
+            category
+          </label>
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            id="city"
+            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+          >
+           <option>Camera</option>
+            <option>phones</option>
+            <option>gaming</option>
+            <option>HeadPhone</option>
+            <option>smartWatch</option>
+            <option>Computers</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-white">Image</label>
+          <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            <div className="space-y-1 text-center">
+              <svg
+                className="mx-auto h-12 w-12 text-white"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <div className="flex text-sm text-gray-600">
+                <label
+                  htmlFor="file-upload"
+                  className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                 >
-                Edit Product
-                </span>
-              <h2 className="text-grey text-sm mb-4 dark:text-gray-400">
-                Update Your Product
-              </h2>
-              <form onSubmit={updateProd}>
-                <div className="w-full rounded-sm bg-[url('https://images.unsplash.com/photo-1449844908441-8829872d2607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHxob21lfGVufDB8MHx8fDE3MTA0MDE1NDZ8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat items-center">
-                  <div className="mx-auto flex justify-center w-[141px] h-[141px] bg-blue-300/20 rounded-full bg-[url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxwcm9maWxlfGVufDB8MHx8fDE3MTEwMDM0MjN8MA&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat">
-                    <div className="bg-white/90 rounded-full w-6 h-6 text-center ml-28 mt-4">
-                      <input
-                        type="file"
-                     
-                        id="upload_profile"
-                        onChange={handleImageUpload}
-                      />
-                      <label htmlFor="upload_profile">
-                        <svg
-                          className="w-6 h-5 text-blue-700"
-                          
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                          />
-                        </svg>
-                      </label>
-                    </div>
-                  </div>
-                  <div className="flex justify-end">
-                    <input
-                      type="file"
-                      name="profile"
-                      id="upload_cover"
-                      hidden
-                      onChange={handleImageUpload}
-                    />
-                    <div className="bg-white flex items-center gap-1 rounded-tl-md px-2 text-center font-semibold">
-                      <label
-                        htmlFor="upload_cover"
-                        className="inline-flex items-center gap-1 cursor-pointer"
-                      >
-                        Cover
-                        <svg
-                          className="w-6 h-5 text-blue-700"
-                          fill="none"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                          />
-                        </svg>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <h2 className="text-center mt-1 font-semibold dark:text-gray-300">
-                  Upload Product Image
-                </h2>
-                <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-                  <div className="w-full mb-4 mt-6">
-                    <label className="mb-2 dark:text-gray-300">Name</label>
-                    <input
-                      type="text"
-                      className="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                      placeholder="Name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full mb-4 lg:mt-6">
-                    <label className="dark:text-gray-300">Price</label>
-                    <input
-                      type="number"
-                      className="mt-2 p-4 w-full border-2 rounded-lg dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                      placeholder="Price"
-                      value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="flex lg:flex-row md:flex-col sm:flex-col xs:flex-col gap-2 justify-center w-full">
-                  <div className="w-full">
-                    <h3 className="dark:text-gray-300 mb-2">Category</h3>
-                    <select
-                      value={category}
-                      onChange={(e) => setCategory(e.target.value)}
-                      className="w-full text-grey border-2 rounded-lg p-4 pl-2 pr-2 dark:text-gray-200 dark:border-gray-600 dark:bg-gray-800"
-                    >
-                      <option disabled value="">
-                        Select category
-                      </option>
-                      <option>gaming</option>
-                      <option>smartphone</option>
-                      <option>clothes</option>
-                      <option>sport</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="w-full rounded-lg bg-blue-500 mt-4 text-white text-lg font-semibold">
-                  <button type="submit" className="w-full p-4">
-                    Submit
-                  </button>
-                </div>
-              </form>
+                  <span>Upload a file</span>
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    className="sr-only"
+                    // value={imgurl}
+                    onChange={handleImageUpload}
+                  />
+                </label>
+                <p className="pl-1 text-white">or drag and drop</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      <div className="flex justify-end mt-6">
+        <button
+          className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+          onClick={() => {
+            updateProd()
+          }}
+        >
+          edit
+        </button>
+      </div>
+    </section>
     </>
   );
 };

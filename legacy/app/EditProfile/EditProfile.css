@@ -98,11 +98,6 @@
     justify-content: center;
     z-index: 999;
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
   .modal-content {
     background: white;
     padding: 20px;
@@ -110,8 +105,4 @@
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
-<<<<<<< HEAD
-  
-  
-=======
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+

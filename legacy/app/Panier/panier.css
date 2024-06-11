@@ -30,7 +30,6 @@ h2 {
   text-align: left;
 }
 
-
 .product-image {
   width: 50px;
   height: auto;
@@ -47,7 +46,6 @@ h2 {
   cursor: pointer;
 }
 
-/* Coupon Container */
 .coupon-container {
   display: flex;
   margin-bottom: 20px;
@@ -68,10 +66,7 @@ h2 {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
-/* Cart Total */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 .cart-total {
   border: 1px solid #eee;
   padding: 20px;
@@ -85,10 +80,7 @@ h2 {
   margin: 5px 0;
 }
 
-<<<<<<< HEAD
-=======
-/* Checkout Button */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 .checkout-button {
   display: block;
   width: 100%;

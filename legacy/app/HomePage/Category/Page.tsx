@@ -8,12 +8,12 @@ import OneCat from '../../OneCat/page';
 
 const Category = () => {
   const cats = [
-    { name: "sport", icon: <FaRunning /> },
-    { name: "gaming", icon: <FaGamepad /> },
-    { name: "phones", icon: <FaMobileAlt /> },
-    { name: "pcs", icon: <FaDesktop /> },
-    { name: "kitchen", icon: <FaUtensils /> },
-    { name: "fishing", icon: <FaFish /> }
+    { name: "Camera", icon: <img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-Camera.svg" class="attachment-full size-full" alt=""/>  },
+    { name: "Computers", icon:<img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-Computer.svg" class="attachment-full size-full" alt=""/>  },
+    { name: "gaming", icon: <img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-Gamepad.svg" class="attachment-full size-full" alt=""/> },
+    { name: "HeadPhone", icon: <img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-Headphone.svg" class="attachment-full size-full" alt=""/> },
+    { name: "phones", icon: <img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-CellPhone.svg" class="attachment-full size-full" alt=""/>  },
+    { name: "smartWatch", icon: <img loading="lazy" decoding="async" width="30" height="30" src="https://glamaxin.com/wp-content/uploads/2023/12/Category-SmartWatch.svg" class="attachment-full size-full" alt=""/> }
   ];
   const [categ, setCat] = useState([]);
   const [selectedCat, setSelectedCat] = useState(null);

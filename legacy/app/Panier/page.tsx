@@ -1,4 +1,3 @@
-
 "use client";
 import axios from "axios";
 import { useAuth } from "../components/context/AuthContext";
@@ -131,7 +130,7 @@ console.log("totalprice",total);
           </button>
         </div>
       </div>
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
     </div>
   );
 }

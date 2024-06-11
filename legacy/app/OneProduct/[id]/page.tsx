@@ -45,16 +45,16 @@ const ProductDetails = ({el}) => {
   const [selectedCategory, setSelectedCategory] = useState(data.category);
 
   useEffect(() => {
-    const fetchRelatedItems = () => {
-      axios.get(`http://localhost:4000/api/products`)
-        .then(response => {
-          const related = response.data.filter(p => p.category === selectedCategory && p.id !== data.id);
-          setRelatedProducts(related);
-        })
-        .catch(error => {
-          console.error('Error fetching related products:', error);
-        });
-    };
+      const fetchRelatedItems = () => {
+          axios.get(`http://localhost:4000/api/products${id}`)
+              .then(response => {
+                  const related = response.data.filter(p => p.category === data.category && p.id !== data.id);
+                  setRelatedProducts(related);
+              })
+              .catch(error => {
+                  console.error('Error fetching related products:', error);
+              });
+      };
 
     fetchRelatedItems();
   }, [selectedCategory, data.id])
@@ -93,14 +93,22 @@ const ProductDetails = ({el}) => {
               {name}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-              {/* {el.name} */}
+
+         
+
+              {description}
+
             </p>
             <div className="flex mb-4">
               <div className="mr-4">
                 <span className="font-bold text-gray-700 dark:text-gray-300">
                   Price:
                 </span>
+
                 <span className="text-gray-600 dark:text-gray-300">289</span>
+
+                <span className="text-gray-600 dark:text-gray-300"> ${price}</span>
+
               </div>
               <div>
                 <span className="font-bold text-gray-700 dark:text-gray-300">
@@ -149,7 +157,9 @@ const ProductDetails = ({el}) => {
                 Product Description:
               </span>
               <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                description
+
+                {description}
+
               </p>
             </div>
           </div>
