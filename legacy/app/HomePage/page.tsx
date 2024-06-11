@@ -3,7 +3,7 @@ import React from "react";
 import Carosel from "./Carosel";
 import Products from "./Products";
 import Category from "./Category/Page"
-
+import Profile from "../Profile/[id]/Page"
 
 
 const Home = () => {
@@ -16,9 +16,11 @@ const Home = () => {
 
   return (
     <>
-      <Carosel />
+      <Carosel/>
       <Category/>
-      <Products />
+      <Products/>
+      <Profile/>
+   
     </>
   );
 };
