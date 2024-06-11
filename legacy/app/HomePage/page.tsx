@@ -3,7 +3,10 @@ import React from "react";
 import Carosel from "./Carosel";
 import Products from "./Products";
 import Category from "./Category/Page"
-import Profile from "../Profile/[id]/Page"
+import Featured from "./feautred/Page";
+import Services from "./feautred/Services";
+import ThisMonth from "./feautred/ThisMonth";
+
 
 
 const Home = () => {
@@ -18,9 +21,11 @@ const Home = () => {
     <>
       <Carosel/>
       <Category/>
-      <Products/>
-      <Profile/>
-   
+      <Products />
+      <ThisMonth/>
+      <Featured/>
+      <Services/>
+     
     </>
   );
 };
