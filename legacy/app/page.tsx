@@ -88,7 +88,7 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router}) => (
               </li>
              
               <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
-                <a href="/EditProfile" className="flex items-center">
+                <a href="/profile" className="flex items-center">
                   EditProfile
                 </a>
               </li>
