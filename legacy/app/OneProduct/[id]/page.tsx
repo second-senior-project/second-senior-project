@@ -42,6 +42,8 @@ const ProductDetails = ({el}) => {
   };
  
 
+  const [selectedCategory, setSelectedCategory] = useState(data.category);
+
   useEffect(() => {
       const fetchRelatedItems = () => {
           axios.get(`http://localhost:4000/api/products${id}`)
@@ -54,8 +56,8 @@ const ProductDetails = ({el}) => {
               });
       };
 
-      fetchRelatedItems();
-  }, [data.category,data.id]);
+    fetchRelatedItems();
+  }, [selectedCategory, data.id])
 
   useEffect(() => {
     fetchProduct();

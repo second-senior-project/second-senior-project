@@ -35,7 +35,7 @@ const AddProduct = () => {
   };
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setImage(file);
+   
 
     const formData = new FormData();
     formData.append("file", file);

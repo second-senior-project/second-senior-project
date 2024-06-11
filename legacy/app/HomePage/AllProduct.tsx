@@ -1,36 +1,18 @@
 "use client";
 import React, { useState } from "react";
-
 import { IoMdMore } from "react-icons/io";
-import { useRouter,usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useAuth } from '../components/context/AuthContext';
 
 
-// const AllProduct = ({ el }) => {
-//   const {user}=useAuth()
-//   const  { cartItems, addToCart }=useAuth()
-
-
-
-
-
 const AllProduct = ({ el }) => {
-  
   const router = useRouter();
-  const { user}=useAuth()
+  const { user } = useAuth();
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [update, setUpdate] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
-  const [menuView, setMenuView] = useState<boolean>(false);
-// console.log(user.id,"userdata");
-// console.log("product",el.id);
-
+  const [update, setUpdate] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [menuView, setMenuView] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -39,26 +21,6 @@ const AllProduct = ({ el }) => {
   const toggleMenu = () => {
     setMenuView(!menuView);
   };
-  // const addToPanier = (id) => {
-  //   console.log("test",user.id);
-  //   console.log("prod",el.id);
-    
-    
-  //   const cartData = {
-  //     UserId: user.id,
-  //     productId: el.id,
-  //   };
-
-  //   axios
-  //     .post("http://localhost:4000/api/Cart/usercart", cartData)
-  //     .then((res) => {
-  //       setData(res.data)
-  //       console.log("panier",res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
 
   const deleteProd = () => {
     axios
@@ -69,7 +31,8 @@ const AllProduct = ({ el }) => {
       })
       .catch((err) => console.log(err));
   };
-  const addToPanier = (id: any) => {
+
+  const addToPanier = (id) => {
     const data = {
       UserId: user.id,
       productId: id,
@@ -78,28 +41,41 @@ const AllProduct = ({ el }) => {
     axios
       .post("http://localhost:4000/api/Cart/usercart", data)
       .then((res) => {
-       setData(res.data)
-        console.log("res.data=>",res.data);
+        setData(res.data);
+        console.log("res.data=>", res.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  
+  const addToWishList = (item) => {
+    const storedWishlist = localStorage.getItem("wishlist");
+    const wishlist = storedWishlist ? JSON.parse(storedWishlist) : [];
+    const itemExists = wishlist.some((wishItem) => wishItem.id === item.id);
+
+    if (!itemExists) {
+      wishlist.push(item);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }
+
+    console.log(wishlist);
+  };
+
   return (
-    <div className="relative flex w-full max-w-[26rem] flex-col   rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
+    
+    <div className="relative flex w-full max-w-[20rem] max-h-[27rem] flex-col   rounded-xl bg-white bg-clip-border text-gray-700 shadow-lg">
       <div className="relative mx-4 mt-4 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
-        <img
-          src={el.imgUrl}
-          alt="ui/ux review check"
-        />
+        <div className="relative mx-4 mt-4 overflow-hidden max-w-[20rem] max-h-[25rem] text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40">
+        <img 
+        src={el.imgUrl}
+         alt={el.name} />
+        </div>
         <div className="absolute inset-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
         <button
           className="!absolute top-4 right-4 h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
-          onClick={()=>router.push("/Wishlist")
-          }
+          onClick={() => addToWishList(el)}
         >
           <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
             <svg
@@ -116,7 +92,7 @@ const AllProduct = ({ el }) => {
           className="absolute top-4 right-12 h-8 w-8 bg-black rounded-full text-white flex items-center justify-center"
           onClick={toggleMenu}
         >
-          
+          <IoMdMore />
         </button>
         {menuView && (
           <div className="absolute top-12 right-12 bg-white shadow-md rounded-md py-2 w-48">
@@ -139,10 +115,7 @@ const AllProduct = ({ el }) => {
         <div className="flex items-center justify-between mb-3">
           <h5
             className="block font-sans text-xl antialiased font-medium leading-snug tracking-normal text-blue-gray-900"
-            onClick={() =>
-
-              router.push(`OneProduct/${el.id}`)
-            }
+            onClick={() => router.push(`OneProduct/${el.id}`)}
           >
             {el.name}
           </h5>
@@ -174,13 +147,12 @@ const AllProduct = ({ el }) => {
         <button
           className="block w-full select-none rounded-lg bg-gray-900 py-3.5 px-7 text-center align-middle font-sans text-sm font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
-
-          onClick={()=>addToPanier(el.id)}
+          onClick={() => addToPanier(el.id)}
         >
           Buy
         </button>
       </div>
-    </div>  
+    </div>
   );
 };
 

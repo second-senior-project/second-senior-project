@@ -5,19 +5,18 @@
   margin: auto;
 }
 
-/* Breadcrumb */
 .breadcrumb {
   font-size: 14px;
   color: #999;
   margin-bottom: 20px;
 }
 
-/* Heading */
+
 h2 {
   margin-bottom: 20px;
 }
 
-/* Cart Table */
+
 .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -31,14 +30,13 @@ h2 {
   text-align: left;
 }
 
-/* Product Image */
 .product-image {
   width: 50px;
   height: auto;
   margin-right: 10px;
 }
 
-/* Return Button */
+
 .return-button {
   display: inline-block;
   margin-bottom: 20px;
@@ -48,7 +46,6 @@ h2 {
   cursor: pointer;
 }
 
-/* Coupon Container */
 .coupon-container {
   display: flex;
   margin-bottom: 20px;
@@ -69,7 +66,7 @@ h2 {
   cursor: pointer;
 }
 
-/* Cart Total */
+
 .cart-total {
   border: 1px solid #eee;
   padding: 20px;
@@ -83,7 +80,7 @@ h2 {
   margin: 5px 0;
 }
 
-/* Checkout Button */
+
 .checkout-button {
   display: block;
   width: 100%;

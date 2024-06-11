@@ -28,6 +28,7 @@ const AddProduct = () => {
         console.log(res.data,"res");
 
 
+
         
         route.push("/HomePage");
       })
@@ -51,7 +52,7 @@ const AddProduct = () => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dfn7keii6/image/upload",
+        "https://api.cloudinary.com/v1_1/dgrmh7he5/image/upload",
 
         formData
       );
@@ -115,10 +116,12 @@ const AddProduct = () => {
             id="city"
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
           >
+            <option>Camera</option>
+            <option>phones</option>
             <option>gaming</option>
-            <option>smartphone</option>
-            <option>clothes</option>
-            <option>sport</option>
+            <option>HeadPhone</option>
+            <option>smartWatch</option>
+            <option>Computers</option>
           </select>
         </div>
 
@@ -163,7 +166,7 @@ const AddProduct = () => {
       </div>
 
       <div className="flex justify-end mt-6">
-        <button
+        <button disabled={imgUrl? false:true}
           className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
           onClick={() => {
             handeAdd(), console.log("checked");

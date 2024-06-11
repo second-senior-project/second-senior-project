@@ -68,7 +68,7 @@ interface cart {
     name:string,
     total:number,
     el:error,
-    id:any,
+    id:number,
     product:string,
     Product:string,
     price:number,
@@ -88,18 +88,6 @@ export interface Passwords {
   newPassword: string;
   confirmNewPassword: string;
 }
-
-// interface ItemType {
-//   image: string;
-//   name: string;
-//   price: number;
-//   oldPrice?: number;
-// }
-
-// interface WishlistItemProps {
-//   item: ItemType;
-// }
-
    interface Product {
     id: string;
     name: string;
