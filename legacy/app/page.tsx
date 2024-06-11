@@ -99,6 +99,23 @@ const SellerNavBar = ({toggleMenu,menuView,signOut,router,key,setKey}) => (
                     Contact
                   </a>
                 </li>
+          <div className="hidden mr-4 lg:block">
+            <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/Contact" className="flex items-center">
+                  Contact
+                </a>
+              </li>
+             
+              <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-black">
+                <a href="/profile" className="flex items-center">
+                  EditProfile
+                </a>
+              </li>
+
+
+
+
                 <li className="block p-1 font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                   <a href="/About" className="flex items-center text-blue-gray-900 text-lg">
                     About

@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <>
-      <Carosel />
+      <Carosel/>
       <Category/>
       <Products />
       <ThisMonth/>
