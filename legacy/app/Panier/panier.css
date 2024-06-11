@@ -1,63 +1,43 @@
-/* Panier Container */
+
 .panier-container {
   padding: 20px;
   max-width: 900px;
   margin: auto;
 }
 
-<<<<<<< HEAD
-=======
-/* Breadcrumb */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
 .breadcrumb {
   font-size: 14px;
   color: #999;
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
-=======
-/* Heading */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 h2 {
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
-=======
-/* Cart Table */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 .cart-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
-.cart-table th, .cart-table td {
-=======
 .cart-table th,
 .cart-table td {
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
   border: 1px solid #eee;
   padding: 10px;
   text-align: left;
 }
 
-<<<<<<< HEAD
-=======
-/* Product Image */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 .product-image {
   width: 50px;
   height: auto;
   margin-right: 10px;
 }
 
-<<<<<<< HEAD
-=======
-/* Return Button */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
+
 .return-button {
   display: inline-block;
   margin-bottom: 20px;
@@ -67,10 +47,7 @@ h2 {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-=======
 /* Coupon Container */
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e
 .coupon-container {
   display: flex;
   margin-bottom: 20px;

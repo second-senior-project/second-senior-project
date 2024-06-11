@@ -8,6 +8,7 @@ import { CiLogout } from "react-icons/ci";
 
 import React, { useEffect, useState } from "react"
 import { useAuth } from './components/context/AuthContext';
+import Link from 'next/link';
 
 export default function Home() {
   const router=useRouter()
@@ -30,14 +31,7 @@ export default function Home() {
 
   const toggleMenu = () => {
     setMenuView(!menuView);
-  };
- 
-
- 
-
-
- 
-
+  }
   useEffect(() => {
     axios
       .get('http://localhost:4000/api/products', {
@@ -53,7 +47,10 @@ export default function Home() {
   }, [token]);
 
   const renderNavBar = () => {
-   
+    
+    if (admin) {
+      return <AdminNavBar />;
+    }  
     if (seller) {
       return <SellerNavBar  toggleMenu={toggleMenu} menuView={menuView} signOut={signOut} router={router}/>;
     } else if (user) {
@@ -244,5 +241,12 @@ const DefaultNavBar = ({router}) => (
             </div>
             </nav>
     </div>
+  </div>
+);
+const AdminNavBar = () => (
+  <div >
+   <li>
+          <a href="http://localhost:3001/">External Link</a>
+        </li>
   </div>
 );

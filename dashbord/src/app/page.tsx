@@ -1,7 +1,14 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
-const Home = () => {
+// import { useAuth } from '../../../../legacy/app/components/context/AuthContext';
+
+const SidBar = () => {
+
+  const logOut=()=>{
+    localStorage.clear()
+    window.location.href='http://localhost:3000/Signin/Login'
+  }
   return (
 
 
@@ -15,13 +22,14 @@ const Home = () => {
         <NavItem icon="books" label="Seller" />
         <NavItem icon="profile" label="Product" />
         <NavItem icon="settings" label="AddProduct" />
-        <NavItem icon="log-out" label="Log Out" />
+        <NavItem icon="log-out" label="Log Out" click={logOut} />
       </nav>
     </div>
   );
 };
 
-const NavItem = ({ icon, label }) => {
+const NavItem = ({ icon, label,click }) => {
+  console.log("click",click);
   const icons = {
     BestSells: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5">
@@ -52,23 +60,34 @@ const NavItem = ({ icon, label }) => {
       </svg>
     ),
     'log-out': (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5">
-        <path  href='LogOut'  fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v7.69l2.72-2.72a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 111.06-1.06l2.72 2.72V4.5a.75.75 0 01.75-.75zm0 17.5a.75.75 0 01-.75-.75V15.56a.75.75 0 111.5 0v4.94a.75.75 0 01-.75.75zm5.75-16.25H13a.75.75 0 000 1.5h4.75A1.25 1.25 0 0119 7.25v9.5a1.25 1.25 0 01-1.25 1.25H13a.75.75 0 000 1.5h4.75A2.75 2.75 0 0020.5 16.75v-9.5A2.75 2.75 0 0017.75 4z" clipRule="evenodd" />
+      <div  onClick={()=>alert("logout")}>
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5"  >
+        <path   fillRule="evenodd" d="M12 3.75a.75.75 0 01.75.75v7.69l2.72-2.72a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 111.06-1.06l2.72 2.72V4.5a.75.75 0 01.75-.75zm0 17.5a.75.75 0 01-.75-.75V15.56a.75.75 0 111.5 0v4.94a.75.75 0 01-.75.75zm5.75-16.25H13a.75.75 0 000 1.5h4.75A1.25 1.25 0 0119 7.25v9.5a1.25 1.25 0 01-1.25 1.25H13a.75.75 0 000 1.5h4.75A2.75 2.75 0 0020.5 16.75v-9.5A2.75 2.75 0 0017.75 4z" clipRule="evenodd" />
       </svg>
+      </div>
     ),
-  };
+    };
+  
 
   return (
  <>
- <Link href={label}>
+
+{typeof click==="function"  ?<div onClick={click} >
+      <div className="flex items-center p-2 gap-4 hover:bg-gray-100 rounded-md transition-colors duration-300">
+        <div className="flex-none">{icons[icon]}</div>
+        <div className="flex-grow">{label}</div>
+      </div>
+    </div>
+ :<Link href={label} >
       <div className="flex items-center p-2 gap-4 hover:bg-gray-100 rounded-md transition-colors duration-300">
         <div className="flex-none">{icons[icon]}</div>
         <div className="flex-grow">{label}</div>
       </div>
     </Link>
-
+}
     </>
   );
 };
 
-export default Home;
+export default SidBar;

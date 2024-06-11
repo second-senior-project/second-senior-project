@@ -35,7 +35,7 @@ console.log(response,"response");
           localStorage.setItem("admin", JSON.stringify(response.data.admin));
           setToken(response.data.tokenadmin);
           localStorage.setItem("token", response.data.tokenadmin);
-          router.push("/admin");
+          window.location.href='http://localhost:3001/User';
         } else {
           setUser(response.data.user);
           localStorage.setItem("user", JSON.stringify(response.data.user));

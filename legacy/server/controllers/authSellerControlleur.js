@@ -1,17 +1,17 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 
 const db = require("../database/index.js");
 const { JWT_SECRET } = require("../config.js");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "uuiteat@gmail.com",
-    pass: "Testid5796433hjkibbf",
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: "uuiteat@gmail.com",
+//     pass: "Testid5796433hjkibbf",
+//   },
+// });
 
 async function login(req, res) {
   const { username, password } = req.body;
@@ -79,30 +79,30 @@ async function register(req, res) {
       email,
     });
 
-    const mailOptions = {
-      from: "uuiteat@gmail.com",
-      to: seller.email,
-      subject: "Welcome to Housify",
-      text: `Dear ${seller.username},
+//     const mailOptions = {
+//       from: "uuiteat@gmail.com",
+//       to: seller.email,
+//       subject: "Welcome to Housify",
+//       text: `Dear ${seller.username},
       
-Thank you for registering with Housify! We are thrilled to have you as a member of our online community.
+// Thank you for registering with Housify! We are thrilled to have you as a member of our online community.
 
-Thank you again for joining us. We look forward to seeing you online!
+// Thank you again for joining us. We look forward to seeing you online!
 
-Best regards,
+// Best regards,
 
-Test
-Buy Sell Team
-`,
-    };
+// Test
+// Buy Sell Team
+// `,
+//     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
+//     transporter.sendMail(mailOptions, function (error, info) {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//     });
 
     return res.status(201).json({ message: "Seller created successfully", seller });
   } catch (error) {

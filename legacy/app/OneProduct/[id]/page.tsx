@@ -42,20 +42,22 @@ const ProductDetails = ({el}) => {
   };
  
 
-  useEffect(() => {
-      const fetchRelatedItems = () => {
-          axios.get(`http://localhost:4000/api/products`)
-              .then(response => {
-                  const related = response.data.filter(p => p.category === data.category && p.id !== data.id);
-                  setRelatedProducts(related);
-              })
-              .catch(error => {
-                  console.error('Error fetching related products:', error);
-              });
-      };
+  const [selectedCategory, setSelectedCategory] = useState(data.category);
 
-      fetchRelatedItems();
-  }, [data.category,data.id]);
+  useEffect(() => {
+    const fetchRelatedItems = () => {
+      axios.get(`http://localhost:4000/api/products`)
+        .then(response => {
+          const related = response.data.filter(p => p.category === selectedCategory && p.id !== data.id);
+          setRelatedProducts(related);
+        })
+        .catch(error => {
+          console.error('Error fetching related products:', error);
+        });
+    };
+
+    fetchRelatedItems();
+  }, [selectedCategory, data.id])
 
   useEffect(() => {
     fetchProduct();
@@ -91,22 +93,14 @@ const ProductDetails = ({el}) => {
               {name}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-<<<<<<< HEAD:legacy/app/HomePage/OneProduct/[id]/page.tsx
               {/* {el.name} */}
-=======
-              {description}
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e:legacy/app/OneProduct/[id]/page.tsx
             </p>
             <div className="flex mb-4">
               <div className="mr-4">
                 <span className="font-bold text-gray-700 dark:text-gray-300">
                   Price:
                 </span>
-<<<<<<< HEAD:legacy/app/HomePage/OneProduct/[id]/page.tsx
                 <span className="text-gray-600 dark:text-gray-300">289</span>
-=======
-                <span className="text-gray-600 dark:text-gray-300"> ${price}</span>
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e:legacy/app/OneProduct/[id]/page.tsx
               </div>
               <div>
                 <span className="font-bold text-gray-700 dark:text-gray-300">
@@ -155,11 +149,7 @@ const ProductDetails = ({el}) => {
                 Product Description:
               </span>
               <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-<<<<<<< HEAD:legacy/app/HomePage/OneProduct/[id]/page.tsx
                 description
-=======
-                {description}
->>>>>>> 9913aab002d920a1dd04b4c89e4b20a1a4b3f19e:legacy/app/OneProduct/[id]/page.tsx
               </p>
             </div>
           </div>
